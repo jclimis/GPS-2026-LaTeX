@@ -1,0 +1,98 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{formato_catedra}
+
+% ==========================================================
+% CONFIGURACIÓN DE MODO: ¿Cuestionario o Resolución?
+% ==========================================================
+\newif\ifresolucion
+\resoluciontrue % <--- Cambia a \resolucionfalse para ocultar respuestas
+% ==========================================================
+
+\Lectura{Lectura I\_L4}
+
+\ifresolucion
+    \TituloDocumento{METODOLOGÍAS ÁGILES \\ {\small (Resolución)}}
+\else
+    \TituloDocumento{METODOLOGÍAS ÁGILES \\ {\small (Cuestionario)}}
+\fi
+
+\begin{document}
+
+\HacerTitulo
+
+\section*{1 \quad CONTENIDO}
+Manifiesto Ágil, marco de trabajo Scrum (roles y eventos) y prácticas de Extreme Programming (XP).
+
+\section*{2 \quad OBJETIVOS}
+\begin{itemize}[leftmargin=1.5cm, label=--]
+    \item \textbf{Analizar} los valores y principios del desarrollo ágil.
+    \item \textbf{Identificar} roles, artefactos y dinámicas en Scrum.
+    \item \textbf{Diferenciar} las prácticas técnicas y roles específicos de XP.
+\end{itemize}
+
+\section*{3 \quad METODOLOGÍA}
+Lectura técnica y resolución de cuestionario basado en Smith, Schwaber y Beck.
+
+\section*{4 \quad BIBLIOGRAFÍA}
+\nocite{smith2009, schwaber2004, beck_xp}
+\printbibliography[heading=none]
+
+\section*{5 \quad ACTIVIDADES}
+
+\subsection*{5.1 \quad Lectura sobre Greg Smith (Agile)}
+\begin{enumerate}[label=5.1.\arabic*, leftmargin=1.5cm]
+    \item \textbf{¿Cómo debe ser el ciclo de vida actual?} 
+    \ifresolucion \\ Debe ser flexible y adaptativo, permitiendo que el equipo aprenda de requisitos emergentes y ajuste el producto mediante iteraciones cortas en lugar de predicciones estáticas. \fi
+
+    \item \textbf{¿Cuáles son “Los Cuatro Valores“ del Manifiesto Ágil?} 
+    \ifresolucion \\ 1. Individuos e interacciones sobre procesos y herramientas. 2. Software funcionando sobre documentación exhaustiva. 3. Colaboración con el cliente sobre negociación contractual. 4. Respuesta ante el cambio sobre seguir un plan. \fi
+
+    \item \textbf{Defina en no más de una oración los puntos clave de los principios ágiles.} 
+    \ifresolucion 
+    \begin{itemize}
+        \item Priorizar la comunicación humana para resolver problemas complejos.
+        \item El valor real es una aplicación operativa, no manuales teóricos.
+        \item Eliminar barreras trabajando codo a codo con el cliente.
+        \item Aceptar que el aprendizaje es más valioso que un plan inicial.
+    \end{itemize} \fi
+
+    \item \textbf{Realice una comparación enfoque tradicional vs. enfoque ágil.} 
+    \ifresolucion \\ El tradicional es predictivo e intenta "congelar" requisitos al inicio; el ágil es adaptativo y usa ciclos de retroalimentación para refinar el conocimiento evolutivo. \fi
+\end{enumerate}
+
+\subsection*{5.2 \quad Lectura sobre Ken Schwaber (Scrum)}
+\begin{enumerate}[label=5.2.\arabic*, leftmargin=1.5cm]
+    \item \textbf{¿Qué es un proyecto de desarrollo de software según el autor?} 
+    \ifresolucion \\ Es un proceso empírico complejo (caos controlado) que requiere inspección constante y adaptación de resultados para manejar la incertidumbre. \fi
+
+    \item \textbf{¿Cuál es la tercera dimensión del gráfico de evaluación de complejidades?} 
+    \ifresolucion \\ La dimensión de las **Personas**, ya que el éxito depende de la interacción humana frente a tecnologías y requisitos cambiantes. \fi
+
+    \item \textbf{¿Cuál es el esqueleto y cuál es el corazón de SCRUM?} 
+    \ifresolucion \\ El esqueleto son los pilares: Transparencia, Inspección y Adaptación. El corazón es el **Sprint**, donde se transforma una idea en un incremento de producto funcional. \fi
+
+    \item \textbf{¿Cuáles son los roles en un Scrum Team?} 
+    \ifresolucion 
+    \begin{itemize}
+        \item \textbf{Product Owner:} Responsable de la visión y prioridades del negocio.
+        \item \textbf{Scrum Master:} Facilitador que elimina impedimentos y asegura el proceso.
+        \item \textbf{Development Team:} Profesionales auto-organizados que ejecutan el trabajo técnico.
+    \end{itemize} \fi
+\end{enumerate}
+
+\subsection*{5.3 \quad Lectura sobre Kent Beck (XP)}
+\begin{enumerate}[label=5.3.\arabic*, leftmargin=1.5cm]
+    \item \textbf{¿Cuáles son las habilidades que debe poseer un programador XP?} 
+    \ifresolucion \\ Dominio de diseño simple, programación en parejas, refactorización constante y Test-Driven Development (TDD). \fi
+
+    \item \textbf{¿Cuál es la diferencia entre un cliente XP y uno tradicional?} 
+    \ifresolucion \\ El cliente XP es un miembro activo que define historias de usuario en tiempo real, no un agente externo que solo entrega un pliego de condiciones. \fi
+
+    \item \textbf{¿Cuál es la diferencia entre el Preparador y el Controlador (Tracker)?} 
+    \ifresolucion \\ El Preparador facilita la infraestructura técnica, mientras que el Controlador mide objetivamente el progreso y la velocidad mediante métricas. \fi
+
+    \item \textbf{¿En qué situaciones el equipo necesita un Consultor?} 
+    \ifresolucion \\ Cuando surgen problemas técnicos especializados que exceden la capacidad actual del equipo y requieren intervención externa puntual. \fi
+\end{enumerate}
+
+\end{document}

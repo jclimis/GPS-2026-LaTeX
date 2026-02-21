@@ -1,0 +1,84 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{formato_catedra}
+
+% ==========================================================
+% CONFIGURACIÓN DE MODO: ¿Cuestionario o Resolución?
+% ==========================================================
+\newif\ifresolucion
+%\resoluciontrue % <--- Cambia a \resolucionfalse para ocultar respuestas
+% ==========================================================
+
+\Lectura{Lectura II\_L3}
+
+\ifresolucion
+    \TituloDocumento{GESTIÓN DE RIESGOS \\ {\small (Resolución)}}
+\else
+    \TituloDocumento{GESTIÓN DE RIESGOS \\ {\small (Cuestionario)}}
+\fi
+
+\begin{document}
+
+\HacerTitulo
+
+\section*{1 \quad CONTENIDO}
+Estrategias de riesgo, identificación, estimación de impacto/probabilidad y plan RMMM.
+
+\section*{2 \quad OBJETIVOS}
+\begin{itemize}[leftmargin=1.5cm, label=--]
+    \item \textbf{Diferenciar} enfoques proactivos de reactivos.
+    \item \textbf{Categorizar} riesgos de proyecto, técnicos y de negocio.
+    \item \textbf{Estructurar} planes de respuesta mediante la metodología RMMM.
+\end{itemize}
+
+\section*{3 \quad METODOLOGÍA}
+Lectura técnica y resolución de cuestionario basado en Pressman (9na Ed.).
+
+\section*{4 \quad BIBLIOGRAFÍA}
+\nocite{pressman2021_cap28}
+\printbibliography[heading=none]
+
+\section*{5 \quad ACTIVIDADES}
+
+\subsection*{5.1 \quad Lectura sobre Pressman: Gestión del Riesgo (9na Ed.)}
+\begin{enumerate}[label=5.1.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Qué tipo de estrategias se utilizan para gestionar los riesgos?} 
+    \ifresolucion \\ \textbf{[Cap. 28.1]} 
+    1) \textbf{Reactiva:} Se actúa cuando el riesgo se manifiesta (gestión de crisis). 
+    2) \textbf{Proactiva:} Identifica riesgos potenciales y establece planes antes de iniciar el trabajo técnico. \fi
+
+    \item \textbf{¿Cuáles son las características de un riesgo?} 
+    \ifresolucion \\ \textbf{[Cap. 28.1]} Poseen \textbf{incertidumbre} (el evento puede o no ocurrir) y \textbf{pérdida} (consecuencias negativas si el evento ocurre). \fi
+
+    \item \textbf{Explique las categorías de riesgos que define el autor.} 
+    \ifresolucion \\ \textbf{[Cap. 28.2]} 
+    1) \textbf{De proyecto:} Afectan cronograma o costos. 
+    2) \textbf{Técnicos:} Amenazan la calidad o viabilidad del diseño. 
+    3) \textbf{De negocio:} Amenazan la viabilidad del producto en el mercado. \fi
+
+    \item \textbf{¿Qué es la identificación de riesgo y cuál es el método?} 
+    \ifresolucion \\ \textbf{[Cap. 28.3]} Es el intento sistemático de especificar amenazas al plan. Se utilizan listas de verificación (Checklists) y el análisis de categorías (tamaño del producto, madurez del proceso, etc.). \fi
+
+    \item \textbf{¿Cuáles son los componentes de riesgo?} 
+    \ifresolucion \\ \textbf{[Cap. 28.3]} Rendimiento (cumplimiento de requisitos), Costo (presupuesto), Apoyo (mantenimiento) y Calendarización (plazos). \fi
+
+    \item \textbf{¿Cuál es el objetivo de la estimación de riesgos?} 
+    \ifresolucion \\ \textbf{[Cap. 28.4]} Cuantificar el nivel de incertidumbre. Requiere dos pasos: 1) Estimar la \textbf{probabilidad} y 2) Estimar las \textbf{consecuencias} (impacto). \fi
+
+    \item \textbf{¿Cómo se puede determinar la probabilidad del riesgo?} 
+    \ifresolucion \\ \textbf{[Cap. 28.4]} Mediante juicio de expertos, datos históricos o simulaciones, asignando valores cuantitativos o rangos cualitativos tras analizar los factores detonantes. \fi
+
+    \item \textbf{¿Qué factores afectan si ocurre un riesgo?} 
+    \ifresolucion \\ \textbf{[Cap. 28.4]} La naturaleza del riesgo, su alcance (cuánto del sistema afecta) y el factor tiempo (momento de ocurrencia y duración del impacto). \fi
+
+    \item \textbf{¿Cómo es recomendable expresar un riesgo?} 
+    \ifresolucion \\ \textbf{[Cap. 28.4]} Mediante el formato **Condición-Consecuencia**. Ej: "Si [incertidumbre], entonces [pérdida]". Esto facilita la medición del impacto. \fi
+
+    \item \textbf{¿Qué es un Plan RMMM y en qué consiste?} 
+    \ifresolucion \\ \textbf{[Cap. 28.6]} Es el plan de **Mitigación** (evitar que ocurra), **Monitoreo** (seguimiento de indicadores) y **Manejo** (plan de contingencia si el riesgo se materializa). 
+
+     \fi
+
+\end{enumerate}
+
+\end{document}

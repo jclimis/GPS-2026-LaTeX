@@ -1,0 +1,80 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{formato_catedra}
+\usepackage{hyperref}
+
+% ==========================================================
+% CONFIGURACIÓN DE MODO: ¿Cuestionario o Resolución?
+% ==========================================================
+\newif\ifresolucion
+%\resoluciontrue % <--- Cambia a \resolucionfalse para ocultar respuestas
+% ==========================================================
+
+\Lectura{Lectura V\_L1}
+
+\ifresolucion
+    \TituloDocumento{REINGENIERÍA Y MANTENIMIENTO \\ {\small (Resolución)}}
+\else
+    \TituloDocumento{REINGENIERÍA Y MANTENIMIENTO \\ {\small (Cuestionario)}}
+\fi
+
+\begin{document}
+
+\HacerTitulo
+
+\section*{1 \quad CONTENIDO}
+Evolución del software, Reingeniería e Ingeniería Inversa (Pressman) y Procesos de Mantenimiento (ISO/IEC 14764).
+
+\section*{2 \quad OBJETIVOS}
+Comprender la importancia del mantenimiento en el ciclo de vida y los mecanismos para transformar sistemas heredados en sistemas mantenibles.
+
+\section*{3 \quad METODOLOGÍA}
+Lectura técnica y resolución de cuestionario basado en Pressman (9na Ed.) y normativa ISO.
+
+\section*{4 \quad BIBLIOGRAFÍA}
+\nocite{pressman2021_mante, iso14764_mante}
+\printbibliography[heading=none]
+
+\section*{5 \quad ACTIVIDADES}
+
+\subsection*{5.1 \quad Lectura sobre Pressman (9na Edición)}
+\begin{enumerate}[label=5.1.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Qué es un proceso de negocio y qué características posee?}
+    \ifresolucion \\ \textbf{[Cap. 29.1]} Es un conjunto de tareas lógicamente relacionadas que se realizan para lograr un resultado de negocio. Se caracteriza por tener objetivos medibles, clientes internos/externos y por cruzar límites organizacionales. \fi
+
+    \item \textbf{Explique los términos de grado de abstracción, completud e interactividad en ingeniería inversa.}
+    \ifresolucion \\ \textbf{[Cap. 29.3]} El \textbf{Grado de abstracción} es el nivel de detalle (desde código hasta diseño). La \textbf{Completud} indica qué tanto del sistema se recuperó. La \textbf{Interactividad} mide la colaboración entre el humano y la herramienta. A mayor abstracción, se requiere más interactividad humana. \fi
+
+    \item \textbf{¿Qué es ingeniería avanzada (Forward Engineering)?}
+    \ifresolucion \\ \textbf{[Cap. 29.6]} Es el proceso de reconstruir una aplicación existente utilizando los modelos recuperados por ingeniería inversa, aplicando estándares modernos de diseño para mejorar su calidad y longevidad. \fi
+
+    \item \textbf{¿Por qué se somete un sistema "Heredado" (Legacy) a reingeniería?}
+    \ifresolucion \\ \textbf{[Cap. 28.1]} Debido a que son críticos para el negocio pero presentan una arquitectura frágil, documentación deficiente y un costo de mantenimiento extremadamente alto que impide su evolución natural. \fi
+
+    \item \textbf{¿Cuál es la importancia del "Análisis de Inventario" en un modelo de reingeniería?}
+    \ifresolucion \\ \textbf{[Cap. 29.2]} Permite a la organización catalogar todas sus aplicaciones para decidir cuáles deben ser re-escritas, cuáles mantenidas como están, cuáles sometidas a reingeniería y cuáles deben ser "jubiladas" basándose en su valor de negocio y calidad técnica. \fi
+
+\end{enumerate}
+
+\subsection*{5.2 \quad Mantenimiento según ISO/IEC 14764}
+\begin{enumerate}[label=5.2.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Cómo define el estándar ISO/IEC 14764 el concepto de Mantenimiento?}
+    \ifresolucion \\ Es el conjunto de actividades necesarias para proporcionar soporte a un producto de software después de su entrega, incluyendo modificaciones de código y documentación por fallas o mejoras. \fi
+
+    \item \textbf{Describa las cuatro categorías de mantenimiento según el estándar.}
+    \ifresolucion \\ \textbf{1) Correctivo:} Corrige fallas detectadas. \textbf{2) Adaptativo:} Ajusta el software a cambios del entorno. \textbf{3) Perfectivo:} Mejora el rendimiento o añade funciones. \textbf{4) Preventivo:} Corrige fallas latentes antes de que afecten la operación. 
+     \fi
+
+    \item \textbf{¿Cuál es la diferencia entre mantenimiento "Proactivo" y "Reactivo"?}
+    \ifresolucion \\ El \textbf{Reactivo} responde a fallas presentes (Correctivo). El \textbf{Proactivo} (Preventivo y Perfectivo) busca anticiparse a errores futuros y aumentar el valor del activo de software. \fi
+
+    \item \textbf{¿Por qué es vital el "Análisis de Impacto" antes de cualquier cambio?}
+    \ifresolucion \\ Para identificar qué componentes del sistema se verán afectados por una modificación, evitando la introducción de fallas de regresión en partes del software que originalmente estaban sanas. \fi
+
+    \item \textbf{¿Qué es la "Transición de Mantenimiento" y por qué es crítica?}
+    \ifresolucion \\ Es el proceso de transferir la responsabilidad del software del equipo de desarrollo al equipo de mantenimiento. Es crítica porque asegura que el personal de mantenimiento tenga el conocimiento y las herramientas necesarias para soportar el producto. \fi
+
+\end{enumerate}
+
+\end{document}

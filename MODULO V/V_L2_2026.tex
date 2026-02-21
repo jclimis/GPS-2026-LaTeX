@@ -1,0 +1,79 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{formato_catedra}
+\usepackage{hyperref}
+
+% ==========================================================
+% CONFIGURACIÓN DE MODO: ¿Cuestionario o Resolución?
+% ==========================================================
+\newif\ifresolucion
+%\resoluciontrue % <--- Cambia a \resolucionfalse para ocultar respuestas
+% ==========================================================
+
+\Lectura{Lectura V\_L2}
+
+\ifresolucion
+    \TituloDocumento{GESTIÓN DE CONFIGURACIÓN DE SOFTWARE (SCM) \\ {\small (Resolución)}}
+\else
+    \TituloDocumento{GESTIÓN DE CONFIGURACIÓN DE SOFTWARE (SCM) \\ {\small (Cuestionario)}}
+\fi
+
+\begin{document}
+
+\HacerTitulo
+
+\section*{1 \quad CONTENIDO}
+Líneas base (baselines), elementos de configuración (SCI), repositorio, control de cambios, auditoría y SCM en entornos ágiles (Git/DevOps).
+
+\section*{2 \quad OBJETIVOS}
+Comprender la importancia de controlar la integridad de los productos de software a lo largo del ciclo de vida y su adaptación a metodologías ágiles.
+
+\section*{3 \quad METODOLOGÍA}
+Resolución de cuestionario técnico basado en Pressman (9na Ed.) y guías profesionales de SCM Moderno.
+
+\section*{4 \quad BIBLIOGRAFÍA}
+\nocite{pressman2021_scm, atlassian_git_agile, fowler_ci}
+\printbibliography[heading=none]
+
+\section*{5 \quad ACTIVIDADES}
+
+\subsection*{5.1 \quad Fundamentos y Conceptos (Pressman 9na Ed.)}
+\begin{enumerate}[label=5.1.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Qué es la Gestión de Configuración de Software (SCM)?}
+    \ifresolucion \\ \textbf{[Cap. 22.1]} Es un conjunto de actividades diseñadas para identificar, controlar y auditar los cambios en el software y sus productos de trabajo asociados (documentos, código, datos) durante todo el ciclo de vida. \fi
+
+    \item \textbf{¿Qué es una "Línea de Referencia" (Baseline)?}
+    \ifresolucion \\ \textbf{[Cap. 22.1.2]} Es un punto de referencia en el desarrollo de software que se marca tras la revisión formal de uno o más Elementos de Configuración. Una vez establecida, los cambios solo pueden realizarse mediante un proceso formal de control de cambios. \fi
+
+    \item \textbf{¿Qué función cumple el Repositorio de SCM?}
+    \ifresolucion \\ \textbf{[Cap. 22.2]} Actúa como un depósito central de todos los productos de software, gestionando la integridad de los datos, permitiendo el control de versiones, el acceso compartido y garantizando que se pueda reconstruir cualquier versión anterior del sistema. \fi
+
+    \item \textbf{¿Cuál es la diferencia entre un objeto básico y uno agregado?}
+    \ifresolucion \\ \textbf{[Cap. 22.3]} Un \textbf{objeto básico} es una unidad atómica (ej. un módulo de código o un diagrama). Un \textbf{objeto agregado} es una colección de objetos básicos u otros objetos agregados (ej. una especificación de diseño completa). Se identifican mediante nombres únicos y atributos de versión. \fi
+
+    \item \textbf{¿Qué es una OCI (Orden de Cambio de Ingeniería) y quién la genera?}
+    \ifresolucion \\ \textbf{[Cap. 22.4]} Es un documento que autoriza formalmente la modificación de un elemento de configuración. La genera la autoridad de control (como un Comité de Control de Cambios - CCB) tras evaluar el impacto de una solicitud de cambio. \fi
+
+    \item \textbf{Describa brevemente cómo es una auditoría de configuración.}
+    \ifresolucion \\ \textbf{[Cap. 22.5]} Es un proceso que asegura que el producto de software cumple con los requisitos y que todos los cambios han sido debidamente documentados, probados y registrados en la línea base. Complementa las revisiones técnicas formales. \fi
+
+\end{enumerate}
+
+\subsection*{5.2 \quad SCM en el Desarrollo Ágil y Moderno}
+\begin{enumerate}[label=5.2.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Qué sucede cuando no se utilizan herramientas de SCM adecuadas?}
+    \ifresolucion \\ Se producen problemas como la "corrupción de versiones", pérdida de cambios realizados por otros programadores (colisiones), dificultad para deshacer errores y la imposibilidad de saber qué versión del código está en producción. \fi
+
+    \item \textbf{¿Qué es la "Big Bang Integration" y por qué se debe evitar?}
+    \ifresolucion \\ \textbf{[Fowler / CI]} Es la práctica de intentar integrar todas las partes del sistema al final del proyecto. Se evita porque suele revelar conflictos masivos entre componentes tarde en el ciclo de vida, lo que aumenta los costos y riesgos exponencialmente. \fi
+
+    \item \textbf{¿Cuáles son los pilares de la Gestión de Configuración Ágil?}
+    \ifresolucion \\ \textbf{[Atlassian]} Se basa en: 1) \textbf{Automatización} (CI/CD), 2) \textbf{Frecuencia} (integraciones diarias), 3) \textbf{Visibilidad} (todo el equipo ve el estado del repositorio) y 4) \textbf{Trazabilidad} (cada cambio se asocia a una tarea o historia). \fi
+
+    \item \textbf{¿Cómo influye la Gestión del Conocimiento en SCM?}
+    \ifresolucion \\ Es vital porque el SCM no solo guarda código, sino el "por qué" de los cambios. Un buen plan de SCM permite capturar el razonamiento técnico detrás de cada versión, facilitando el mantenimiento futuro y la incorporación de nuevos miembros. \fi
+
+\end{enumerate}
+
+\end{document}

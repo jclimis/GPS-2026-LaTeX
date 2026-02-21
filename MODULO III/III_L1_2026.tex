@@ -1,0 +1,87 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{formato_catedra}
+\usepackage{hyperref}
+
+% ==========================================================
+% CONFIGURACIÓN DE MODO: ¿Cuestionario o Resolución?
+% ==========================================================
+\newif\ifresolucion
+%\resoluciontrue % <--- Cambia a \resolucionfalse para ocultar respuestas
+% ==========================================================
+
+% --- DATOS DEL DOCUMENTO PARAMETRIZADOS ---
+\Lectura{Lectura VI\_L1}
+
+
+\ifresolucion
+    \TituloDocumento{ESTILOS DE CODIFICACIÓN Y \\BUENAS PRÁCTICAS \\ {\small (Resolución)}}
+\else
+    \TituloDocumento{ESTILOS DE CODIFICACIÓN Y BUENAS PRÁCTICAS \\ {\small (Cuestionario)}}
+\fi
+
+\begin{document}
+
+\HacerTitulo
+
+\section*{1 \quad CONTENIDO}
+Fundamentos de legibilidad, estilos de codificación y documentación técnica basados en el paradigma de Código Limpio (Clean Code). Análisis de nomenclatura, estructura de funciones y estándares de industria modernos.
+
+\section*{2 \quad OBJETIVOS}
+\begin{itemize}[leftmargin=1.5cm, label=--]
+    \item \textbf{Aplicar} criterios de legibilidad y nomenclatura profesional según el estándar de Robert C. Martin.
+    \item \textbf{Diferenciar} entre comentarios de valor y código mal expresado.
+    \item \textbf{Evaluar} la importancia de los estándares de estilo de la industria (Google/Airbnb).
+\end{itemize}
+
+\section*{3 \quad METODOLOGÍA}
+Lectura crítica de la bibliografía y análisis comparativo de fragmentos de código.
+
+
+\section*{4 \quad BIBLIOGRAFÍA}
+\nocite{martin2008,google_style_guide}
+\printbibliography[heading=none]
+
+\section*{5 \quad ACTIVIDADES}
+
+\subsection*{5.1 \quad Sobre Robert C. Martin}
+\begin{enumerate}[label=5.1.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Por qué los nombres de variables deben revelar la intención?}
+    \ifresolucion \\ \textbf{[Cap. 2]} El nombre de una variable debe decirnos por qué existe, qué hace y cómo se usa. Si un nombre requiere un comentario, entonces no revela la intención (Ej: usar \texttt{diasParaCierre} en lugar de \texttt{d}). \fi
+
+    \item \textbf{¿Cuál es la regla de oro respecto al tamaño de las funciones?}
+    \ifresolucion \\ \textbf{[Cap. 3]} Las funciones deben ser pequeñas, y cuando creas que son lo suficientemente pequeñas, deben ser todavía más pequeñas. Cada función debe realizar una sola cosa (Principio de Responsabilidad Única). \fi
+
+    \item \textbf{¿Qué función cumplen los comentarios y por qué se dice que son un "mal necesario"?}
+    \ifresolucion \\ \textbf{[Cap. 4]} Los comentarios deben usarse para explicar el "por qué" y no el "qué". Si el código es lo suficientemente limpio, no debería necesitar comentarios explicativos. Un comentario suele ser un síntoma de que no pudimos expresar la idea mediante código; el código evoluciona, pero los comentarios suelen quedar obsoletos. \fi
+
+    \item \textbf{¿Cuáles son las categorías de comentarios útiles?}
+    \ifresolucion \\ \textbf{[Cap. 4]} 1) Comentarios legales (copyright). 2) Informativos (explicar un patrón regex complejo). 3) Advertencia de consecuencias. 4) Tareas pendientes (TODO). 5) Clarificación de resultados de librerías externas. \fi
+
+    \item \textbf{¿Qué son los "nombres significativos" en los identificadores?}
+    \ifresolucion \\ \textbf{[Cap. 2]} Son aquellos que evitan la desinformación, son pronunciables, buscables y evitan codificaciones innecesarias como la notación húngara o prefijos de miembros, los cuales ya no son necesarios en IDEs modernos. \fi
+
+\end{enumerate}
+
+\subsection*{5.2 \quad Sobre Estándares Modernos y Heurística (Google Style Guides / Martin)}
+\begin{enumerate}[label=5.2.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Qué es un Linter y cómo ayuda a mantener el estilo de codificación?}
+    \ifresolucion \\ Es una herramienta que analiza el código estáticamente para marcar errores de estilo y posibles fallos lógicos basándose en una guía de estilo predefinida (como la de Google), automatizando la corrección que antes era manual y subjetiva. \fi
+
+    \item \textbf{¿Cómo debe ser el orden de las declaraciones de datos según los estándares modernos?}
+    \ifresolucion \\ \textbf{[Cap. 17]} Se recomienda la "localidad": declarar las variables lo más cerca posible de donde se van a utilizar, en lugar de agruparlas todas al inicio de la función. Esto reduce el rastro visual que el lector debe seguir. \fi
+
+    \item \textbf{¿Qué es la programación defensiva en la codificación de E/S?}
+    \ifresolucion \\ Es el principio de diseñar el código asumiendo que las entradas de datos serán incorrectas o malformadas, validando siempre los límites, nulidad y tipos antes de procesar la información para evitar fallos catastróficos. \fi
+
+    \item \textbf{¿Qué prueba "de lectura" se realiza para verificar si un código es entendible?}
+    \ifresolucion \\ \textbf{[Cap. 17]} La "Revisión por Pares" (Code Review). Si un colega no puede entender la lógica del módulo en menos de 2 minutos sin explicaciones verbales, el código requiere refactorización para mejorar su claridad. 
+     \fi
+
+    \item \textbf{¿Cuál es la conclusión moderna sobre la documentación interna?}
+    \ifresolucion \\ \textbf{[Cap. 4]} El código es la única fuente de verdad. La documentación interna debe ser mínima y enfocada en la arquitectura de alto nivel, mientras que el código debe ser "autodocumentado" a través de su claridad y estructura profesional. \fi
+
+\end{enumerate}
+
+\end{document}

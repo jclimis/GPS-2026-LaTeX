@@ -1,0 +1,77 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{formato_catedra}
+\usepackage{hyperref}
+
+% ==========================================================
+% CONFIGURACIÓN DE MODO: ¿Cuestionario o Resolución?
+% ==========================================================
+\newif\ifresolucion
+%\resoluciontrue % <--- Cambia a \resolucionfalse para ocultar respuestas
+% ==========================================================
+
+\Lectura{Lectura IV\_L2}
+
+\ifresolucion
+    \TituloDocumento{MODELO DE MADUREZ Y CAPACIDAD\\ ISO/IEC 33000 (SPICE) \\ {\small (Resolución)}}
+\else
+    \TituloDocumento{MODELO DE MADUREZ Y CAPACIDAD\\ ISO/IEC 33000 (SPICE) \\ {\small (Cuestionario)}}
+\fi
+
+\begin{document}
+
+\HacerTitulo
+
+\section*{1 \quad CONTENIDO}
+Modelos de determinación de capacidad y mejora de procesos de software. Arquitectura del estándar ISO/IEC 33000 (Evolución de ISO/IEC 15504 - SPICE).
+
+\section*{2 \quad OBJETIVOS}
+Identificar los componentes, niveles de capacidad y procesos de evaluación bajo el estándar internacional SPICE.
+
+\section*{3 \quad METODOLOGÍA}
+Investigación basada en el marco normativo ISO y la bibliografía de referencia de la cátedra.
+
+\section*{4 \quad BIBLIOGRAFÍA}
+\nocite{piattini2020spice}
+\printbibliography[heading=none]
+
+\section*{5 \quad ACTIVIDADES}
+
+\subsection*{5.1 \quad Cuestionario sobre ISO/IEC 33000 (SPICE)}
+\begin{enumerate}[label=5.1.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Qué es SPICE y cuál es su principal objetivo?}
+    \ifresolucion \\ \textbf{[Piattini, Cap. 11.1]} Es el acrónimo de \textit{Software Process Improvement and Capability dEtermination}. Su objetivo es proporcionar una base para la evaluación de procesos de software y determinar la capacidad de los mismos mediante un marco de trabajo armonizado internacionalmente. \fi
+
+    \item \textbf{Explique las dos dimensiones del modelo SPICE.}
+    \ifresolucion \\ \textbf{[Piattini, Cap. 11.2]} 
+    1) \textbf{Dimensión de procesos:} Define qué procesos se evalúan (siguiendo el modelo de ciclo de vida ISO/IEC 12207).
+    2) \textbf{Dimensión de capacidad:} Define una escala de medida para determinar la capacidad de cualquier proceso.
+     \fi
+
+    \item \textbf{Describa los niveles de capacidad según la norma.}
+    \ifresolucion \\ \textbf{[Piattini, Cap. 11.2.2]} 
+    \begin{itemize}
+        \item \textbf{Nivel 0 (Incompleto):} No se alcanzan los objetivos del proceso.
+        \item \textbf{Nivel 1 (Realizado):} El proceso logra sus resultados.
+        \item \textbf{Nivel 2 (Gestionado):} El proceso se planifica, supervisa y ajusta.
+        \item \textbf{Nivel 3 (Establecido):} Se utiliza un proceso definido basado en estándares.
+        \item \textbf{Nivel 4 (Predecible):} El proceso opera dentro de límites definidos estadísticamente.
+        \item \textbf{Nivel 5 (Optimizado):} El proceso se mejora continuamente.
+    \end{itemize} \fi
+
+    \item \textbf{¿Qué es la escala de calificación N-P-L-F?}
+    \ifresolucion \\ \textbf{[Piattini, Cap. 11.3]} Es la escala utilizada para puntuar los atributos de proceso:
+    \textbf{N (No logrado):} 0-15\%.
+    \textbf{P (Parcialmente):} 16-50\%.
+    \textbf{L (Largamente):} 51-85\%.
+    \textbf{F (Totalmente):} 86-100\%. \fi
+
+    \item \textbf{¿Cómo se define un "Perfil de Capacidad de Proceso"?}
+    \ifresolucion \\ \textbf{[Piattini, Cap. 11.4]} Es el conjunto de calificaciones obtenidas para cada uno de los atributos de los procesos seleccionados para la evaluación, permitiendo identificar brechas respecto al nivel objetivo. \fi
+
+    \item \textbf{Diferencia entre Madurez y Capacidad en este contexto.}
+    \ifresolucion \\ \textbf{[Piattini, Cap. 11.1.2]} La \textbf{capacidad} se mide por procesos individuales, mientras que la \textbf{madurez} es un conjunto predefinido de niveles de capacidad que la organización debe alcanzar de forma sistémica. \fi
+
+\end{enumerate}
+
+\end{document}

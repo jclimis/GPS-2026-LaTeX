@@ -1,0 +1,84 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{formato_catedra}
+
+% ==========================================================
+% CONFIGURACIÓN DE MODO: ¿Cuestionario o Resolución?
+% ==========================================================
+\newif\ifresolucion
+\resoluciontrue % <--- Cambia a \resolucionfalse para ocultar respuestas
+% ==========================================================
+
+\Lectura{Lectura I\_L1}
+
+% Lógica de Título con subtítulo de estado
+\ifresolucion
+    \TituloDocumento{PRODUCTOS Y PROCESOS \\ {\small (Resolución)}}
+\else
+    \TituloDocumento{PRODUCTOS Y PROCESOS \\ {\small (Cuestionario)}}
+\fi
+
+\begin{document}
+
+\HacerTitulo
+
+\section*{1 \quad CONTENIDO}
+Naturaleza del software, dominios de aplicación, sistemas heredados y nuevos paradigmas tecnológicos.
+
+\section*{2 \quad OBJETIVOS}
+\begin{itemize}[leftmargin=1.5cm, label=--]
+    \item \textbf{Diferenciar} el comportamiento del software frente al hardware.
+    \item \textbf{Identificar} los componentes de la definición formal de software.
+    \item \textbf{Analizar} los desafíos de los sistemas heredados y entornos modernos.
+\end{itemize}
+
+\section*{3 \quad METODOLOGÍA}
+Lectura técnica y resolución de cuestionario basado en Pressman (9na Ed.).
+
+\section*{4 \quad BIBLIOGRAFÍA}
+\nocite{pressman2021_cap1}
+\printbibliography[heading=none]
+
+\section*{5 \quad ACTIVIDADES}
+
+\subsection*{5.1 \quad Preguntas sobre Pressman (9na Edición)}
+\begin{enumerate}[label=5.1.\arabic*, leftmargin=1.5cm]
+    \item \textbf{¿Qué distribuye el software?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 1: El software y la ingeniería de software]} El software actúa como un transformador que distribuye el producto más importante de la era moderna: la información. Produce, administra, adquiere, modifica o transmite datos en redes mundiales. \fi
+
+    \item \textbf{¿Cómo es la tasa de fallas del hardware y qué diferencia hay con la del software?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 1]} El hardware sigue la "curva de bañera" (desgaste físico). El software no se desgasta físicamente; su tasa de fallas se eleva debido al deterioro lógico causado por cambios que introducen efectos secundarios. \fi
+
+    \item \textbf{¿Cuál es la definición de software?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 1]} Se define como un conjunto de: 1) instrucciones (programas); 2) estructuras de datos para la manipulación de información; y 3) información descriptiva (documentación). \fi
+
+    \item \textbf{¿Qué ha llevado al desarrollo de software a adoptar prácticas de ingeniería de software?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 1]} La creciente complejidad de los sistemas, la necesidad de gestionar costos y plazos, y la criticidad del software en funciones vitales para la sociedad y los negocios. \fi
+
+    \item \textbf{Ejemplos de aplicaciones de software según los dominios mencionados:} 
+    \ifresolucion 
+    \begin{itemize}
+        \item \textbf{Sistemas:} Sistemas operativos.
+        \item \textbf{Aplicación:} Procesadores de texto o navegadores.
+        \item \textbf{Ingeniería/ciencias:} Software de astronomía o CAD.
+        \item \textbf{Embebido:} Control de microondas o frenos ABS.
+        \item \textbf{IA:} Redes neuronales o sistemas expertos.
+    \end{itemize} \fi
+
+    \item \textbf{¿Por qué es difícil cambiar un sistema heredado?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 1]} Debido a su diseño deficiente, falta de documentación coherente, código altamente acoplado y el riesgo de generar fallas inesperadas al realizar modificaciones. \fi
+
+    \item \textbf{¿Qué características tiene una aplicación móvil?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 1]} Interfaces táctiles, conectividad intermitente, recursos de hardware limitados (batería) y arquitecturas optimizadas para multitarea. \fi
+
+    \item \textbf{¿Qué es el Cloud Computing?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 1]} Es un modelo que proporciona acceso bajo demanda a un ecosistema compartido de recursos de computación (servidores, redes, almacenamiento) a través de Internet. \fi
+\end{enumerate}
+
+\end{document}

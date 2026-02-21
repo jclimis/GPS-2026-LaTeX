@@ -1,0 +1,91 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{formato_catedra}
+
+% ==========================================================
+% CONFIGURACIÓN DE MODO: ¿Cuestionario o Resolución?
+% ==========================================================
+\newif\ifresolucion
+\resoluciontrue % <--- Cambia a \resolucionfalse para ocultar respuestas
+% ==========================================================
+
+\Lectura{Lectura II\_L2}
+
+\ifresolucion
+    \TituloDocumento{PLANIFICACIÓN Y ESTIMACIÓN ÁGIL \\ {\small (Resolución)}}
+\else
+    \TituloDocumento{PLANIFICACIÓN Y ESTIMACIÓN ÁGIL \\ {\small (Cuestionario)}}
+\fi
+
+\begin{document}
+
+\HacerTitulo
+
+\section*{1 \quad CONTENIDO}
+Puntos de Historia, Tiempo Ideal, Velocidad del equipo y técnicas de estimación (Planning Poker).
+
+\section*{2 \quad OBJETIVOS}
+\begin{itemize}[leftmargin=1.5cm, label=--]
+    \item \textbf{Diferenciar} el tamaño relativo (puntos) del tiempo absoluto (horas).
+    \item \textbf{Comprender} la métrica de velocidad como capacidad predictiva.
+    \item \textbf{Aplicar} técnicas de consenso para reducir la incertidumbre en estimaciones.
+\end{itemize}
+
+\section*{3 \quad METODOLOGÍA}
+Lectura técnica y resolución de cuestionario basado en Mike Cohn.
+
+\section*{4 \quad BIBLIOGRAFÍA}
+\nocite{cohn2005agile}
+\printbibliography[heading=none]
+
+\section*{5 \quad ACTIVIDADES}
+
+\subsection*{5.1 \quad Lectura sobre Mike Cohn: Estimación Ágil}
+\begin{enumerate}[label=5.1.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Qué son los puntos de historia y qué características tienen?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 4]} Son una unidad de medida relativa para expresar el tamaño de una historia. Son **relativos** (comparativos), **aditivos** y representan una combinación de **esfuerzo, complejidad y riesgo**. \fi
+
+    \item \textbf{¿Cómo se pueden definir los puntos de historias?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 4]} Mediante la comparación con una "historia base" conocida. A las demás se les asigna un valor (usualmente de la serie de Fibonacci) según sean más o menos complejas que la base. \fi
+
+    \item \textbf{¿Qué es la velocidad del equipo?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 4]} Es el promedio de puntos de historia que un equipo completa funcionalmente en un Sprint. Sirve como métrica predictiva para la planificación de versiones futuras. \fi
+
+    \item \textbf{¿Qué es tiempo ideal y qué diferencia hay con el tiempo transcurrido?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 5]} El **tiempo ideal** es el esfuerzo neto sin interrupciones. El **tiempo transcurrido** es el tiempo real del reloj que incluye reuniones, correos y otras distracciones. \fi
+
+    \item \textbf{¿Qué relación existe entre la precisión de la estimación y el esfuerzo?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 6]} Invertir demasiado esfuerzo en estimar no garantiza precisión absoluta. La estimación ágil busca ser "suficientemente buena" para tomar decisiones, evitando el desperdicio de tiempo en análisis excesivo. 
+    
+     \fi
+
+    \item \textbf{¿Qué técnicas de estimación se utilizan en Ágil?} 
+    \ifresolucion 
+    \begin{itemize}
+        \item \textbf{Planning Poker:} Basada en consenso y cartas de Fibonacci.
+        \item \textbf{T-Shirt Sizing:} Categorización por tallas (XS a XL).
+        \item \textbf{Afining Mapping:} Agrupación visual por similitud de tamaño.
+    \end{itemize} \fi
+
+    \item \textbf{¿Qué ventaja tiene el Planning Poker?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 6]} Evita el "efecto ancla", fomenta la discusión técnica y revela riesgos u omisiones al obligar a los extremos (estimaciones más altas y bajas) a justificar su postura. \fi
+
+    \item \textbf{¿La estimación por Planning Poker debe ser precisa?} 
+    \ifresolucion \\ 
+    No. Debe ser **útil**. El objetivo es lograr un entendimiento compartido del trabajo y un compromiso realista del equipo, no una cifra exacta de tiempo. \fi
+
+    \item \textbf{¿Cuándo y por qué es recomendable jugar a Planning Poker?} 
+    \ifresolucion \\ 
+    Durante el refinamiento del backlog o la planificación del Sprint. Es recomendable porque involucra a quienes harán el trabajo, democratiza la decisión y mejora la calidad de la solución técnica mediante el debate.
+    
+     \fi
+
+\end{enumerate}
+
+\end{document}

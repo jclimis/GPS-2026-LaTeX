@@ -1,0 +1,87 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{formato_catedra}
+\usepackage{hyperref}
+
+% ==========================================================
+% CONFIGURACIÓN DE MODO: ¿Cuestionario o Resolución?
+% ==========================================================
+\newif\ifresolucion
+\resoluciontrue % <--- Cambia a \resolucionfalse para ocultar respuestas
+% ==========================================================
+
+\Lectura{Lectura V\_L1}
+
+\ifresolucion
+    \TituloDocumento{CALIDAD DEL SOFTWARE \\ {\small (Resolución)}}
+\else
+    \TituloDocumento{CALIDAD DEL SOFTWARE \\ {\small (Cuestionario)}}
+\fi
+
+\begin{document}
+
+\HacerTitulo
+
+\section*{1 \quad CONTENIDO}
+Conceptos fundamentales de Calidad de Software, métricas, factores de calidad y modelos estadísticos de confiabilidad y seguridad.
+
+\section*{2 \quad OBJETIVOS}
+Comprender las diversas perspectivas de la calidad y los modelos clásicos y modernos para su aseguramiento en el ciclo de vida del software, diferenciando las visiones teóricas de las métricas estadísticas.
+
+\section*{3 \quad METODOLOGÍA}
+Lectura analítica y respuesta directa basada en bibliografía actualizada de Pressman (9na Ed.) y Piattini (5ta Ed.).
+
+\section*{4 \quad BIBLIOGRAFÍA}
+\nocite{pressman2021_cap1416,piattini2020_1}
+\printbibliography[heading=none]
+
+\section*{5 \quad ACTIVIDADES}
+
+\subsection*{5.1 \quad Lectura sobre Piattini: Vistas y Conceptos de Calidad}
+\begin{enumerate}[label=5.1.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Cuáles son las cinco vistas de calidad que señala David A. Garvin?}
+    \ifresolucion \\ \textbf{[Cap. 1]} 
+    1) \textbf{Trascendental:} Algo que se reconoce pero no se puede definir (excelencia). 
+    2) \textbf{Basada en el Usuario:} Adecuación al propósito o "fitness for use". 
+    3) \textbf{Basada en el Fabricante:} Conformidad con las especificaciones y requisitos. 
+    4) \textbf{Basada en el Producto:} Atributos internos medibles objetivamente. 
+    5) \textbf{Basada en el Valor:} Calidad a un precio aceptable o costo-beneficio. 
+    Estas vistas se relacionan porque un producto de éxito debe equilibrar las expectativas del cliente con una fabricación técnica precisa. \fi
+
+    \item \textbf{¿Cómo definimos la calidad del software según este autor?}
+    \ifresolucion \\ \textbf{[Cap. 1]} Se define como la concordancia con los requisitos funcionales y de rendimiento explícitamente establecidos, con los estándares de desarrollo explícitamente documentados y con las características implícitas que se esperan de todo software desarrollado profesionalmente. \fi
+
+    \item \textbf{Explique los conceptos: Proceso Eficaz, Producto Útil y Valor Agregado.}
+    \ifresolucion \\ \textbf{[Cap. 1]}
+    \textbf{Proceso Eficaz:} Infraestructura que permite al equipo técnico aplicar metodologías que eviten el caos. \\
+    \textbf{Producto Útil:} Software que satisface las necesidades reales del usuario final. \\
+    \textbf{Valor Agregado:} Resultado de un software de calidad que genera beneficios económicos o competitivos para la organización. \fi
+
+\end{enumerate}
+
+\subsection*{5.2 \quad Lectura sobre Pressman: Factores y Estadística de Calidad}
+\begin{enumerate}[label=5.2.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Cuáles son las dimensiones de calidad que define Garvin?}
+    \ifresolucion \\ \textbf{[Cap. 14]} Desempeño, características, confiabilidad, conformidad, durabilidad, capacidad de servicio, estética y calidad percibida. Pressman utiliza estas dimensiones para ayudar a los equipos a priorizar qué atributos son más importantes para un proyecto específico. \fi
+
+    \item \textbf{¿Cuáles son los factores de calidad de McCall?}
+    \ifresolucion \\ \textbf{[Cap. 14]} Se dividen en tres áreas críticas: 
+    1) \textbf{Operación:} Corrección, fiabilidad, eficiencia, integridad, facilidad de uso. 
+    2) \textbf{Revisión:} Mantenibilidad, flexibilidad, facilidad de prueba. 
+    3) \textbf{Transición:} Portabilidad, reusabilidad, interoperabilidad. 
+     \fi
+
+    \item \textbf{¿Cuáles son las causas principales de los errores y defectos severos desde el punto de vista estadístico?}
+    \ifresolucion \\ \textbf{[Cap. 16]} Según el Aseguramiento Estadístico de la Calidad (AEC), la mayoría de los defectos severos se originan en un número pequeño de tareas de ingeniería de software mal ejecutadas o en módulos específicos (Ley de Pareto), usualmente relacionados con interfaces complejas o lógica no estructurada. \fi
+
+    \item \textbf{¿Qué es un producto de software confiable en términos estadísticos?}
+    \ifresolucion \\ \textbf{[Cap. 16]} Es la probabilidad de operación libre de fallas durante un tiempo especificado en un entorno determinado. Se cuantifica habitualmente mediante el Tiempo Medio Entre Fallas ($MTBF = MTTF + MTTR$).
+     \fi
+
+    \item \textbf{¿Cuál es la diferencia entre “confiabilidad del software” y “seguridad de software”?}
+    \ifresolucion \\ \textbf{[Cap. 16]} La \textbf{confiabilidad} utiliza el análisis estadístico para determinar la probabilidad de falla del sistema frente a sus requisitos. La \textbf{seguridad de software (Safety)} es una actividad de SQA que se centra en identificar y evaluar riesgos potenciales que puedan causar accidentes catastróficos, buscando que el sistema sea resiliente ante fallas imprevistas. \fi
+
+\end{enumerate}
+
+\end{document}

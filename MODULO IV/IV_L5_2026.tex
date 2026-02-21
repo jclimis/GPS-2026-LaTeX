@@ -1,0 +1,95 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{formato_catedra}
+\usepackage{hyperref}
+
+% ==========================================================
+% CONFIGURACIÓN DE MODO: ¿Cuestionario o Resolución?
+% ==========================================================
+\newif\ifresolucion
+\resoluciontrue % <--- Cambia a \resolucionfalse para ocultar respuestas
+% ==========================================================
+
+\Lectura{Lectura IV\_L5}
+
+\ifresolucion
+    \TituloDocumento{MÉTRICAS ORIENTADAS A OBJETOS Y ÁGILES \\ {\small (Resolución)}}
+\else
+    \TituloDocumento{MÉTRICAS ORIENTADAS A OBJETOS Y ÁGILES \\ {\small (Cuestionario)}}
+\fi
+
+\begin{document}
+
+\HacerTitulo
+
+\section*{1 \quad CONTENIDO}
+Métricas de producto para sistemas orientados a objetos (OO), métricas de diseño y mediciones específicas para marcos de trabajo ágiles (Velocidad, Burndown, Cycle Time).
+
+\section*{2 \quad OBJETIVOS}
+Identificar y aplicar métricas técnicas para evaluar la calidad del diseño OO y el rendimiento de equipos ágiles.
+
+\section*{3 \quad METODOLOGÍA}
+Lectura y respuesta directa basada en Pressman (9na Ed.) y Guías de Atlassian.
+
+\section*{4 \quad BIBLIOGRAFÍA}
+\nocite{pressman2021_21, atlassian_agile_metrics}
+\printbibliography[heading=none]
+
+\section*{5 \quad ACTIVIDADES}
+
+\subsection*{5.1 \quad Lectura sobre Pressman (9na Edición)}
+\begin{enumerate}[label=5.1.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Cuáles son las características mesurables que describe Whitmire?}
+    \ifresolucion \\ \textbf{[Pressman, Cap. 21.3]} Describe cinco características: 
+    1) \textbf{Tamaño:} Se mide en términos de volumen, complejidad y funcionalidad.
+    2) \textbf{Función:} El valor entregado al usuario (puntos de función).
+    3) \textbf{Estructura:} Relacionada con la jerarquía de clases y herencia.
+    4) \textbf{Acoplamiento:} Las conexiones físicas entre elementos del diseño.
+    5) \textbf{Cohesión:} El grado en que las funciones de una clase están relacionadas. \fi
+
+    \item \textbf{¿Cuáles son las métricas que propone Chidamber y Kemerer? Explíquelas brevemente.}
+    \ifresolucion \\ \textbf{[Pressman, Cap. 21.3.1]} Se conoce como el conjunto de métricas CK:
+    \begin{itemize}
+        \item \textbf{WMC:} Métodos ponderados por clase (complejidad de la clase).
+        \item \textbf{DIT:} Profundidad del árbol de herencia (nivel máximo de la jerarquía).
+        \item \textbf{NOC:} Número de hijos (subclases inmediatas).
+        \item \textbf{CBO:} Acoplamiento entre clases (dependencia de otras clases).
+        \item \textbf{RFC:} Respuesta para una clase (métodos que pueden ejecutarse).
+        \item \textbf{LCOM:} Falta de cohesión en los métodos (mide la similitud entre métodos).
+    \end{itemize} 
+     \fi
+
+    \item \textbf{¿En cuántas categorías se dividen las métricas OO de Lorenz y Kidd?}
+    \ifresolucion \\ \textbf{[Pressman, Cap. 21.3.2]} Las dividen en cuatro categorías: 
+    1) \textbf{Métricas de tamaño:} Enfoque en conteo de métodos y clases.
+    2) \textbf{Métricas de herencia:} Enfoque en la estructura del árbol.
+    3) \textbf{Métricas internas de la clase:} Cohesión y características de los métodos.
+    4) \textbf{Métricas de colaboración:} Acoplamiento y comunicación entre objetos. \fi
+
+    \item \textbf{¿Qué son las métricas de diseño en el nivel de componente?}
+    \ifresolucion \\ \textbf{[Pressman, Cap. 21.2.2]} Son métricas aplicadas a módulos individuales para evaluar su calidad interna. Se centran en tres aspectos: cohesión del componente, acoplamiento con otros componentes y su complejidad algorítmica. \fi
+
+\end{enumerate}
+
+\subsection*{5.2 \quad Sobre Métricas Ágiles (Atlassian Guide)}
+\begin{enumerate}[label=5.2.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Qué puntos se deben considerar al elegir métricas ágiles?}
+    \ifresolucion \\ \textbf{[Atlassian Guide]} Se debe considerar que las métricas sirvan para la mejora del equipo, no para el control o comparación externa. Deben enfocarse en la eficiencia del flujo, la calidad del software y el valor de negocio entregado. \fi
+
+    \item \textbf{¿En qué información se basan las métricas ágiles y qué es la "Velocidad"?}
+    \ifresolucion \\ \textbf{[Atlassian Guide]} Se basan en el flujo de los ítems del Sprint Backlog. La \textbf{Velocidad} es la cantidad de trabajo (puntos de historia) que un equipo completa en un sprint. Sirve para predecir cuánto trabajo puede asumir el equipo en el futuro. \fi
+
+    \item \textbf{¿Qué es el "Burndown Chart" y qué indica?}
+    \ifresolucion \\ \textbf{[Atlassian Guide]} Es un gráfico que muestra el trabajo restante contra el tiempo disponible en el sprint. Indica la probabilidad de que el equipo complete el compromiso del sprint y ayuda a detectar cuellos de botella temprano.
+     \fi
+
+    \item \textbf{¿Qué es el "Cycle Time" y por qué es necesario medirlo?}
+    \ifresolucion \\ \textbf{[Atlassian Guide]} Es el tiempo que transcurre desde que se inicia el trabajo en una tarea hasta que se completa. Es necesario medirlo porque permite evaluar la agilidad del proceso y la capacidad de respuesta ante cambios. \fi
+
+    \item \textbf{¿Qué sucede cuando un equipo “madura” respecto a su velocidad?}
+    \ifresolucion \\ \textbf{[Atlassian Guide]} Un equipo que madura no incrementa su velocidad indefinidamente, sino que logra una **velocidad estable y predecible**. Esto permite que la organización confíe en los planes de lanzamiento a largo plazo. \fi
+
+\end{enumerate}
+
+\end{document}

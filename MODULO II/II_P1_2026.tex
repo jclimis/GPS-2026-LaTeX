@@ -1,0 +1,1030 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{formato_catedra}
+
+% ─── Paquetes adicionales ────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{colortbl}
+
+% ─── Configuración de colores temáticos ─────────────────────────────────────
+\definecolor{azulCatedra}{RGB}{26,82,118}
+\definecolor{verdeCatedra}{RGB}{20,90,50}
+\definecolor{amarilloAviso}{RGB}{251,243,219}
+\definecolor{rojoError}{RGB}{231,76,60}
+\definecolor{azulClaro}{RGB}{213,234,248}
+\definecolor{verdeClaro}{RGB}{210,240,220}
+\definecolor{grisCabecera}{RGB}{52,73,94}
+\definecolor{grisFilaImpar}{RGB}{245,247,250}
+
+% ─── Estilos de cajas especiales ────────────────────────────────────────────
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{cajaResolucion}[1][]{
+    enhanced, breakable,
+    colback=verdeClaro!60,
+    colframe=verdeCatedra,
+    fonttitle=\bfseries\small,
+    title={$\checkmark$ Resolución},
+    #1
+}
+
+\newtcolorbox{cajaError}[1][]{
+    enhanced, breakable,
+    colback=amarilloAviso,
+    colframe=rojoError,
+    coltitle=white,
+    fonttitle=\bfseries\small,
+    title={\textbf{[!] Errores Frecuentes}},
+    #1
+}
+
+\newtcolorbox{cajaFormula}[1][]{
+    enhanced,
+    colback=azulClaro!50,
+    colframe=azulCatedra,
+    fonttitle=\bfseries\small,
+    title={Fórmula},
+    before upper={\centering},
+    #1
+}
+
+\newtcolorbox{cajaEnunciado}[1][]{
+    enhanced, breakable,
+    colback=white,
+    colframe=azulCatedra,
+    fonttitle=\bfseries,
+    #1
+}
+
+% ─── Comandos auxiliares de tabla ────────────────────────────────────────────
+\newcommand{\cabTbl}[1]{\cellcolor{grisCabecera}\textcolor{white}{\textbf{#1}}}
+\newcommand{\subCabTbl}[1]{\cellcolor{azulCatedra!80}\textcolor{white}{\textbf{\small #1}}}
+
+% ─── CONFIGURACIÓN DEL MODO (Enunciado / Resolución) ─────────────────────────
+% Cambia a \resolucionfalse para generar sólo el enunciado
+\newif\ifresolucion
+\resoluciontrue
+
+% ─── Metadatos del documento ─────────────────────────────────────────────────
+\Lectura{Práctico II\_P1}
+
+\ifresolucion
+    \TituloDocumento{ESTIMACIÓN POR PUNTOS DE CASOS DE USO\\[4pt]
+                     {\normalsize (con Resolución)}}
+\else
+    \TituloDocumento{ESTIMACIÓN POR PUNTOS DE CASOS DE USO\\[4pt]
+                     {\normalsize (Enunciado)}}
+\fi
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\HacerTitulo
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section*{1 \quad CONTENIDO}
+% ─────────────────────────────────────────────────────────────────────────────
+Módulo II. Planificación y Gestión de Proyectos de Software. Actividades prácticas del
+tema \textbf{Estimación mediante Puntos de Casos de Uso (PCU)}.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section*{2 \quad OBJETIVOS}
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{itemize}[leftmargin=1.5cm, label=--]
+    \item \textbf{Aplicar} una técnica de estimación basada en el paradigma
+          orientado a objetos.
+    \item \textbf{Comprender} los conceptos de complejidad de actores, complejidad
+          de casos de uso, factores técnicos y factores de entorno.
+    \item \textbf{Calcular} los Puntos de Casos de Uso sin ajuste (UUCP), el Factor
+          de Complejidad Técnica (TCF), el Factor de Entorno (ECF) y los PCU ajustados
+          (AUCP).
+    \item \textbf{Estimar} el esfuerzo de desarrollo mediante los modelos de Karner,
+          Schneider \& Winters y productividades propias.
+    \item \textbf{Afianzar} los conceptos de caso de uso al nivel de \emph{meta de
+          usuario}, escenario principal exitoso y extensiones.
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section*{3 \quad METODOLOGÍA}
+% ─────────────────────────────────────────────────────────────────────────────
+Resolución de ejercicios prácticos mediante la aplicación de conceptos expuestos en
+las clases teóricas, con base en la bibliografía propuesta. Se presentan dos sistemas
+reales simplificados (ATM y TPV) para ejercitar la técnica de estimación
+PCU en forma completa, desde la clasificación de actores hasta la duración del proyecto.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section*{4 \quad BIBLIOGRAFÍA}
+% ─────────────────────────────────────────────────────────────────────────────
+\nocite{karner1993,cohn2013ucp,anda2001industry,pressman2021_cap25,
+        schneider1998applying,cockburn2001writing}
+\printbibliography
+
+\vspace{0.5em}
+\noindent\textbf{Nota bibliográfica:} La productividad de referencia de Karner
+(20\,h/PCU) se publicó originalmente en~\cite{karner1993}. Análisis posteriores
+\cite{anda2001industry} y la experiencia de industria documentada en
+\cite{cohn2013ucp} muestran que este valor puede variar ampliamente; se recomienda
+calibrarlo con datos históricos propios de la organización.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section*{5 \quad ACTIVIDADES}
+% ─────────────────────────────────────────────────────────────────────────────
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\subsection*{5.1 \quad Problema 1: Análisis de la Bibliografía}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+Leer los artículos propuestos~\cite{cohn2013ucp,anda2001industry} y responder
+a las siguientes preguntas:
+
+\begin{enumerate}[label=\textbf{A1.\arabic*.}, leftmargin=1.8cm, itemsep=0.8em]
+
+\item \textbf{¿Qué miden los Puntos de Caso de Uso (PCU) y de qué son
+      función?}~\cite{cohn2013ucp}
+
+\ifresolucion
+\begin{cajaResolucion}
+Los PCU miden el \textbf{tamaño funcional} del software desde la perspectiva del
+usuario, expresado a través de los casos de uso. Son función de la
+\textbf{complejidad relativa} de los actores y de los casos de uso del sistema
+(cantidad de transacciones por CU), ajustada por factores técnicos del proyecto
+y del entorno del equipo de desarrollo.
+\end{cajaResolucion}
+\fi
+
+\item \textbf{El autor~\cite{cohn2013ucp} asimila la \textsc{transacción} a otro
+      concepto cuando el caso de uso se especifica en un nivel adecuado. ¿Cuál es
+      ese concepto y cuál es el nivel de descripción adecuado para que la
+      equivalencia sea válida?}
+
+\ifresolucion
+\begin{cajaResolucion}
+El autor asimila la \emph{transacción} al concepto de \textbf{paso} (o
+\emph{action step}) dentro de la descripción del caso de uso. La equivalencia
+es válida únicamente cuando el caso de uso se especifica al nivel de
+\textbf{meta de usuario} (\emph{user goal}): cada paso del escenario principal
+representa una interacción completa entre actor y sistema.
+
+\begin{cajaError}
+\textbf{Error frecuente:} confundir ``transacción'' con ``caso de uso
+completo''. La transacción es \emph{un paso} del CU, no el CU en sí.
+Contar el CU entero como una sola transacción produce estimaciones muy
+subajustadas.
+\end{cajaError}
+\end{cajaResolucion}
+\fi
+
+\item \textbf{¿Qué es la \textsc{meta} de un caso de uso, un
+      \textsc{escenario}, un \textsc{escenario principal exitoso} y una
+      \textsc{extensión}, según~\cite{cohn2013ucp}?}
+
+\ifresolucion
+\begin{cajaResolucion}
+\begin{itemize}[leftmargin=1cm, itemsep=0.3em]
+  \item \textbf{Meta:} el objetivo concreto que el actor principal intenta
+        alcanzar al interactuar con el sistema. Define el \emph{nivel} del CU.
+  \item \textbf{Escenario:} una secuencia específica de acciones e interacciones
+        entre actores y el sistema; es una instancia de un CU.
+  \item \textbf{Escenario principal exitoso (EPE):} la secuencia ``feliz'' de
+        pasos que lleva directamente a la meta, sin errores ni alternativas.
+  \item \textbf{Extensión:} condición alternativa o excepcional que bifurca el
+        flujo normal; puede o no conducir al éxito.
+\end{itemize}
+\end{cajaResolucion}
+\fi
+
+\item \textbf{¿Qué es una \textsc{transacción} según~\cite{anda2001industry}?}
+
+\ifresolucion
+\begin{cajaResolucion}
+Para Anda~\cite{anda2001industry} una transacción es \textbf{un conjunto de
+acciones ejecutadas de forma atómica}: inicia con una entrada del actor, el
+sistema procesa e interactúa con datos u otros sistemas, y concluye con una
+respuesta al actor. Es la unidad de conteo básica para clasificar la
+complejidad de un caso de uso.
+\end{cajaResolucion}
+\fi
+
+\item \textbf{¿Qué problemas identifica~\cite{anda2001industry} para contar el
+      número de transacciones en un caso de uso?}
+
+\ifresolucion
+\begin{cajaResolucion}
+Anda identifica los siguientes problemas principales:
+\begin{itemize}[leftmargin=1cm, itemsep=0.3em]
+  \item \textbf{Granularidad inconsistente} de la especificación: distintos
+        analistas escriben los CU con niveles de detalle muy diferentes.
+  \item \textbf{Ambigüedad en las extensiones}: no queda claro si los pasos
+        alternativos deben contarse como transacciones adicionales.
+  \item \textbf{Relaciones entre CU} (\emph{include}/\emph{extend}): dificultan
+        delimitar qué pasos pertenecen a qué CU.
+  \item \textbf{Falta de experiencia del estimador} para mapear pasos de CU a
+        la definición de transacción.
+\end{itemize}
+\end{cajaResolucion}
+\fi
+
+\item \textbf{Según~\cite{cohn2013ucp}, ¿las extensiones deben incluirse en el
+      cálculo de PCU o no? ¿Por qué?}
+
+\ifresolucion
+\begin{cajaResolucion}
+\textbf{No deben incluirse} las extensiones en el conteo de transacciones para
+clasificar la complejidad del CU (Cohn, p.~8). El razonamiento es que las
+extensiones representan flujos alternativos o de excepción que, aunque añaden
+esfuerzo de prueba, en general no cambian sustancialmente el
+\emph{peso} del CU en la estimación. Incluirlas inflaría artificialmente la
+complejidad y haría que CU simples pasasen a categorías superiores, distorsionando
+la estimación total.
+\end{cajaResolucion}
+\fi
+
+\item \textbf{Para el cálculo de la duración se propuso originalmente
+      (Karner~\cite{karner1993}) 20\,h por cada PCU. ¿Puede mantenerse
+      actualmente esa correspondencia? ¿Qué puede hacerse al respecto
+      (\cite{cohn2013ucp})?}
+
+\ifresolucion
+\begin{cajaResolucion}
+\textbf{No puede mantenerse directamente.} Karner definió el valor de 20\,h/PCU
+en 1993, basándose en datos de proyectos de la época con herramientas,
+lenguajes y metodologías muy distintos a los actuales. En 30 años las
+productividades han cambiado radicalmente:
+
+\begin{center}
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Productividad} & \textbf{h-h / PCU} & \textbf{Referencia} \\
+\midrule
+Baja (equipos inexpertos) & 28--36 & Schneider \& Winters \\
+Media (Karner original)   & 20     & Karner (1993) \\
+Alta (equipos actuales)   & 4--10  & Estadísticas recientes \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{¿Qué hacer?} Cohn recomienda \textbf{calibrar la productividad} con
+datos históricos de proyectos anteriores similares. La fórmula correcta es:
+\[
+  \text{Productividad} = \frac{\text{horas reales de codificación}}
+                               {\text{AUCP del proyecto}}
+\]
+Una vez disponible ese valor propio, el modelo PCU deja de ser especulativo y
+se convierte en una herramienta predictiva confiable.
+
+\begin{cajaError}
+\textbf{Error frecuente A1.7:} Aplicar la conversión $44.000\,\text{h}/2.000\,\text{h}
+= 22$\,h/PCU en lugar de $44.000/2.000 = 22$ (división correcta). El valor
+de referencia Sch\&Win ($800\,\text{h}$) se usa para otro contexto de
+normalización.
+\end{cajaError}
+\end{cajaResolucion}
+\fi
+
+\end{enumerate}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\subsection*{5.2 \quad Problema 2: Sistema ATM Simplificado}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+Obtener los Puntos de Casos de Uso (PCU sin ajuste y ajustados) para el sistema
+descrito a continuación. Estimar el esfuerzo en h-h y meses-hombre usando
+Karner, Schneider\,\&\,Winters y productividad propia.
+
+% ─── 5.2.1 Definición ────────────────────────────────────────────────────────
+\subsubsection*{5.2.1 \quad Definición del Problema}
+
+Se requiere desarrollar un \textbf{prototipo elemental} que muestre las
+funcionalidades más básicas de un cajero automático (ATM). El prototipo servirá
+para descubrir requisitos, estudiar la implementación de funcionalidades y
+ejercitar el patrón arquitectónico \textbf{Modelo--Vista--Control (MVC)}.
+
+% ─── 5.2.2 Requisitos ────────────────────────────────────────────────────────
+\subsubsection*{5.2.2 \quad Requisitos Funcionales y Restricciones}
+
+\noindent\textbf{Funcionalidades:}
+\begin{enumerate}[label=\arabic*., leftmargin=1.5cm]
+    \item Validar PIN del cliente.
+    \item Elegir Opciones de servicio.
+    \item Consultar Saldo de una cuenta simulada.
+    \item Extraer dinero.
+    \item Depositar dinero.
+    \item Transferir dinero entre dos cuentas.
+\end{enumerate}
+
+\noindent\textbf{Restricciones:}
+\begin{itemize}[leftmargin=1.5cm, label=--]
+    \item Funciona en una única PC, sin acceso a otros sistemas ni seguridad real.
+    \item Sin procesamiento concurrente.
+    \item Instalación rápida y mantenimiento muy sencillo (módulos reutilizables).
+    \item Facilidad de uso esencial (intuitivo, sin formación previa).
+    \item \textbf{Portabilidad esencial} $\Rightarrow$ lenguaje Java.
+    \item Eficiencia y tiempo de respuesta \emph{no} son críticos.
+\end{itemize}
+
+% ─── 5.2.3 Características del Grupo ─────────────────────────────────────────
+\subsubsection*{5.2.3 \quad Características del Grupo de Desarrollo}
+
+\begin{cajaEnunciado}[title=Perfil del equipo – ATM]
+Una única persona a tiempo parcial (\emph{part-time}), familiarizada con el
+Proceso Unificado de Desarrollo (RUP), pero \textbf{sin experiencia en Java}.
+\end{cajaEnunciado}
+
+% ─── 5.2.4 Diagrama de Casos de Uso ──────────────────────────────────────────
+\subsubsection*{5.2.4 \quad Diagrama de Casos de Uso del ATM}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{images/diagrama_cu_atm.png}
+    \caption{Diagrama de Casos de Uso del Sistema ATM Simplificado}
+    \label{fig:cu_atm}
+\end{figure}
+
+% ─── 5.2.5 Especificación de Casos de Uso ────────────────────────────────────
+\subsubsection*{5.2.5 \quad Especificación de Casos de Uso}
+
+\noindent\textbf{CU\#01 -- Validar PIN}\\[2pt]
+\begin{tabular}{@{}p{3cm}p{11cm}@{}}
+\textit{Actor principal:} & Cliente \\
+\textit{Precondiciones:}  & Ninguna. \\
+\textit{Disparador:}      & El Cliente se presenta ante el ATM y activa el programa. \\
+\end{tabular}
+
+\smallskip\noindent\textit{Descripción (Escenario Principal Exitoso):}
+\begin{enumerate}[label=\arabic*., leftmargin=1.5cm, noitemsep]
+    \item Se despliega la pantalla de autenticación; el Cliente escribe usuario y PIN.
+    \item El sistema valida el par (usuario, PIN) en la BDD y da acceso. Continúa en CU02.
+\end{enumerate}
+\textit{Extensiones:}
+\begin{itemize}[leftmargin=1.5cm, noitemsep, label=--]
+    \item \textbf{2a.} PIN inválido $\to$ se emite mensaje de invalidez; continúa en CU01, paso 1.
+\end{itemize}
+
+\medskip\noindent\textbf{CU\#02 -- Elegir Opciones}\\[2pt]
+\begin{tabular}{@{}p{3cm}p{11cm}@{}}
+\textit{Actor principal:} & Cliente \\
+\textit{Precondiciones:}  & Par (usuario, PIN) válido. \\
+\textit{Disparador:}      & El PIN acaba de ser validado (fin de CU01). \\
+\end{tabular}
+
+\smallskip\noindent\textit{Descripción:}
+\begin{enumerate}[label=\arabic*., leftmargin=1.5cm, noitemsep]
+    \item Se despliega la pantalla de opciones; el Cliente selecciona ``SALDO''. Continúa en CU03.
+\end{enumerate}
+\textit{Extensiones:}
+\begin{itemize}[leftmargin=1.5cm, noitemsep, label=--]
+    \item \textbf{1a.} ``EXTRAER'' $\to$ continúa en CU04. \quad
+          \textbf{1b.} ``DEPOSITAR'' $\to$ continúa en CU05.
+    \item \textbf{1c.} ``TRANSFERIR'' $\to$ continúa en CU06. \quad
+          \textbf{1d.} ``SALIR'' $\to$ sistema se desactiva.
+\end{itemize}
+
+\medskip\noindent\textbf{CU\#03 -- Consultar Saldo}\\[2pt]
+\textit{Precondiciones:} Par (usuario, PIN) válido. \textit{Disparador:} opción ``SALDO'' en CU02.
+\begin{enumerate}[label=\arabic*., leftmargin=1.5cm, noitemsep]
+    \item Pantalla de consulta. El Cliente introduce su número de cuenta.
+    \item El sistema consulta la BDD y muestra el saldo.
+    \item El Cliente selecciona ``SALIR''; se cierra la pantalla. Continúa en CU02.
+\end{enumerate}
+\textit{Extensiones:} \textbf{2a.} Cuenta inválida $\to$ mensaje de error; continúa en CU03 paso 1.
+
+\medskip\noindent\textbf{CU\#04 -- Extraer}\\[2pt]
+\textit{Precondiciones:} PIN válido. \textit{Disparador:} opción ``EXTRAER'' en CU02.
+\begin{enumerate}[label=\arabic*., leftmargin=1.5cm, noitemsep]
+    \item Pantalla de extracción. Cliente introduce cuenta y monto.
+    \item Sistema verifica cuenta válida y saldo suficiente en BDD.
+    \item Sistema actualiza saldo, muestra nuevo saldo, entrega dinero y comprobante.
+    \item Cliente selecciona ``SALIR''. Continúa en CU02.
+\end{enumerate}
+\textit{Extensiones:} \textbf{2a.} Cuenta inválida $\to$ mensaje; regresa a paso 1. \quad
+\textbf{2b.} Saldo insuficiente $\to$ ídem.
+
+\medskip\noindent\textbf{CU\#05 -- Depositar}\\[2pt]
+\textit{Precondiciones:} PIN válido. \textit{Disparador:} opción ``DEPOSITAR'' en CU02.
+\begin{enumerate}[label=\arabic*., leftmargin=1.5cm, noitemsep]
+    \item Pantalla de depósito. Cliente introduce cuenta y monto (más dinero físico).
+    \item Sistema verifica cuenta y correspondencia entre monto y dinero físico.
+    \item Sistema actualiza saldo, muestra nuevo saldo, entrega comprobante.
+    \item Cliente selecciona ``SALIR''. Continúa en CU02.
+\end{enumerate}
+\textit{Extensiones:} \textbf{2a.} Cuenta inválida $\to$ devuelve dinero; regresa paso 1. \quad
+\textbf{2b.} Monto no coincide $\to$ mensaje; regresa paso 1.
+
+\medskip\noindent\textbf{CU\#06 -- Transferir}\\[2pt]
+\textit{Precondiciones:} PIN válido. \textit{Disparador:} opción ``TRANSFERIR'' en CU02.
+\begin{enumerate}[label=\arabic*., leftmargin=1.5cm, noitemsep]
+    \item Pantalla de transferencia. Cliente introduce cuenta origen, destino y monto.
+    \item Sistema verifica ambas cuentas y saldo suficiente en BDD.
+    \item Sistema actualiza saldos en BDD, muestra nuevo saldo y emite comprobante.
+    \item Cliente selecciona ``SALIR''. Continúa en CU02.
+\end{enumerate}
+\textit{Extensiones:} \textbf{2a.} Cuenta origen inválida. \quad
+\textbf{2b.} Cuenta destino inválida. \quad
+\textbf{2c.} Saldo insuficiente. En todos: mensaje y regresa paso 1.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\ifresolucion
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection*{Resolución -- Problema 2: Sistema ATM}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/diagrama_pcu_metodologia.png}
+    \caption{Metodología de cálculo PCU aplicada al Sistema ATM}
+    \label{fig:metodologia_atm}
+\end{figure}
+
+\paragraph{Paso 1 y 2: Clasificación de Actores y UAW}
+
+Los actores se clasifican según el tipo de interfaz con el sistema:
+
+\begin{table}[H]
+\centering
+\small
+\caption{Clasificación de Actores -- ATM}
+\label{tab:actores_atm}
+\begin{tabular}{p{3.5cm} p{4cm} c c c}
+\toprule
+\cabTbl{Actor} & \cabTbl{Tipo de Interfaz} & \cabTbl{Categoría} &
+\cabTbl{Peso} & \cabTbl{Cantidad} \\
+\midrule
+\rowcolor{grisFilaImpar}
+Cliente & Interfaz gráfica (GUI) & Complejo & 3 & 1 \\
+BDD PIN & Archivo / base de datos & Simple & 1 & 1 \\
+\rowcolor{grisFilaImpar}
+BDD Cuenta & Archivo / base de datos & Simple & 1 & 1 \\
+\midrule
+\multicolumn{4}{r}{\textbf{UAW (Unadjusted Actor Weight)}} & \textbf{5} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{cajaFormula}
+\[ \text{UAW} = 1\times 3 + 1\times 1 + 1\times 1 = \mathbf{5} \]
+\end{cajaFormula}
+
+\paragraph{Pasos 3 y 4: Clasificación de Casos de Uso y UUCW}
+
+Se cuenta el número de transacciones del \emph{Escenario Principal Exitoso}
+(sin extensiones) para clasificar cada CU.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Clasificación de Casos de Uso -- ATM}
+\label{tab:cu_atm}
+\begin{tabular}{p{0.8cm} p{3cm} p{5cm} c c c}
+\toprule
+\cabTbl{CU\#} & \cabTbl{Nombre} & \cabTbl{Justificación} &
+\cabTbl{Tx} & \cabTbl{Categoría} & \cabTbl{Peso} \\
+\midrule
+\rowcolor{grisFilaImpar}
+01 & Validar PIN      & 2 pasos en EPE (autenticar + dar acceso) & 2 & Simple & 5 \\
+02 & Elegir Opciones  & 1 paso en EPE (mostrar menú + elegir) & 1 & Simple & 5 \\
+\rowcolor{grisFilaImpar}
+03 & Consultar Saldo  & 2 pasos en EPE (ingresar cuenta + mostrar saldo) & 2 & Simple & 5 \\
+04 & Extraer          & 2 pasos en EPE (verificar + actualizar/entregar) & 2 & Simple & 5 \\
+\rowcolor{grisFilaImpar}
+05 & Depositar        & 2 pasos en EPE (verificar + actualizar/recibo) & 2 & Simple & 5 \\
+06 & Transferir       & 2 pasos en EPE (verificar ambas cuentas + actualizar) & 2 & Simple & 5 \\
+\midrule
+\multicolumn{5}{r}{\textbf{UUCW (Unadjusted Use Case Weight)}} & \textbf{30} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{itemize}[leftmargin=1.2cm, label=--]
+    \item Simple: $\leq 3$ transacciones $\Rightarrow$ 5 puntos.
+    \item Medio: 4--7 transacciones $\Rightarrow$ 10 puntos.
+    \item Complejo: $>7$ transacciones $\Rightarrow$ 15 puntos.
+\end{itemize}
+
+\paragraph{Paso 5: Puntos de CU Sin Ajuste (UUCP)}
+
+\begin{cajaFormula}
+\[ \text{UUCP} = \text{UAW} + \text{UUCW} = 5 + 30 = \mathbf{35} \]
+\end{cajaFormula}
+
+\paragraph{Paso 6: Factor de Complejidad Técnica (TCF)}
+
+La evaluación (0--5 ó 0--10) refleja el \textbf{grado de influencia} del factor
+en el sistema ATM según las restricciones definidas.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Factores de Complejidad Técnica -- ATM}
+\label{tab:tcf_atm}
+\begin{tabular}{c p{5.5cm} c c c}
+\toprule
+\cabTbl{Factor} & \cabTbl{Descripción} & \cabTbl{Peso ($w_i$)} &
+\cabTbl{Evaluación ($e_i$)} & \cabTbl{$w_i\times e_i$} \\
+\midrule
+\rowcolor{grisFilaImpar}
+T1 & Sistema distribuido             & 2.0 & 0 & 0.0 \\
+T2 & Tiempo de respuesta (rendimiento) & 1.0 & 0 & 0.0 \\
+\rowcolor{grisFilaImpar}
+T3 & Eficiencia para el usuario final & 1.0 & 3 & 3.0 \\
+T4 & Procesamiento interno complejo   & 1.0 & 0 & 0.0 \\
+\rowcolor{grisFilaImpar}
+T5 & Código reutilizable              & 1.0 & 5 & 5.0 \\
+T6 & Facilidad de instalación         & 0.5 & 5 & 2.5 \\
+\rowcolor{grisFilaImpar}
+T7 & Facilidad de uso                 & 0.5 & 5 & 2.5 \\
+T8 & Portabilidad                     & 2.0 & 5 & 10.0 \\
+\rowcolor{grisFilaImpar}
+T9 & Facilidad de modificación        & 1.0 & 5 & 5.0 \\
+T10 & Concurrencia                    & 1.0 & 0 & 0.0 \\
+\rowcolor{grisFilaImpar}
+T11 & Características de seguridad    & 1.0 & 0 & 0.0 \\
+T12 & Acceso para partes externas     & 1.0 & 0 & 0.0 \\
+\rowcolor{grisFilaImpar}
+T13 & Facilidad de formación          & 1.0 & 5 & 5.0 \\
+\midrule
+\multicolumn{4}{r}{\textbf{TF (suma ponderada)}} & \textbf{33.0} \\
+\midrule
+\multicolumn{5}{r}{$\text{TCF} = 0{,}06 + 0{,}01 \times 33{,}0 = \mathbf{0{,}39}$}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{cajaError}
+\textbf{Nota importante sobre TCF:} El ATM es de una sola PC, sin distribución (T1=0),
+sin requisitos de rendimiento estrictos (T2=0), sin seguridad (T3=0), sin concurrencia
+(T10=0). Sin embargo, la portabilidad (Java) y la facilidad de modificación son
+fundamentales. Un error frecuente es puntuar T1 o T10 con valores altos en un sistema
+que explícitamente es monousuario y no distribuido.
+\end{cajaError}
+
+\begin{cajaFormula}
+\[ \text{TCF} = 0{,}06 + 0{,}01 \times \text{TF} = 0{,}06 + 0{,}01 \times 33 = \mathbf{0{,}39} \]
+\end{cajaFormula}
+
+\paragraph{Paso 7: Factor de Entorno (ECF)}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Factores de Entorno -- ATM}
+\label{tab:ecf_atm}
+\begin{tabular}{c p{5.5cm} c c c}
+\toprule
+\cabTbl{Factor} & \cabTbl{Descripción} & \cabTbl{Peso ($f_i$)} &
+\cabTbl{Evaluación ($v_i$)} & \cabTbl{$f_i\times v_i$} \\
+\midrule
+\rowcolor{grisFilaImpar}
+E1 & Familiaridad con el proceso (RUP) & 1.5 & 3 & 4.5 \\
+E2 & Experiencia en el dominio (ATM)   & 0.5 & 1 & 0.5 \\
+\rowcolor{grisFilaImpar}
+E3 & Experiencia en OO                 & 1.0 & 2 & 2.0 \\
+E4 & Capacidad del analista líder      & 0.5 & 3 & 1.5 \\
+\rowcolor{grisFilaImpar}
+E5 & Motivación                        & 1.0 & 4 & 4.0 \\
+E6 & Estabilidad de requisitos         & 2.0 & 4 & 8.0 \\
+\rowcolor{grisFilaImpar}
+E7 & Trabajo a tiempo parcial          & -1.0 & 3 & -3.0 \\
+E8 & Dificultad del lenguaje (Java nuevo) & -1.0 & 5 & -5.0 \\
+\midrule
+\multicolumn{4}{r}{\textbf{EF (suma ponderada)}} & \textbf{12.5} \\
+\midrule
+\multicolumn{5}{r}{$\text{ECF} = 1{,}4 - 0{,}03 \times 12{,}5 = \mathbf{1{,}025}$}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{cajaFormula}
+\[ \text{ECF} = 1{,}4 - 0{,}03 \times \text{EF} = 1{,}4 - 0{,}03 \times 12{,}5 = \mathbf{1{,}025} \]
+\end{cajaFormula}
+
+\paragraph{Paso 8: PCU Ajustados (AUCP)}
+
+\begin{cajaFormula}
+\[ \text{AUCP} = \text{UUCP} \times \text{TCF} \times \text{ECF}
+               = 35 \times 0{,}39 \times 1{,}025 = \mathbf{13{,}97} \]
+\end{cajaFormula}
+
+\paragraph{Pasos 9 y 10: Estimación del Esfuerzo y Duración}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Estimación del Esfuerzo de Codificación -- ATM}
+\label{tab:esfuerzo_atm}
+\begin{tabular}{l c c c c}
+\toprule
+\cabTbl{Modelo} & \cabTbl{Productividad} & \cabTbl{Esfuerzo Cod.}
+& \cabTbl{Esfuerzo Total*} & \cabTbl{Duración (1 persona)} \\
+\midrule
+\rowcolor{grisFilaImpar}
+Karner         & 20 h/PCU & $13{,}97 \times 20 = 279{,}4$\,hh
+               & $279{,}4/0{,}4 = 698{,}5$\,hh $= 3{,}97$\,mh & 3,97 meses \\
+Schneider\,\&\,Winters & 28 h/PCU & $13{,}97 \times 28 = 391{,}2$\,hh
+               & $391{,}2/0{,}4 = 978{,}0$\,hh $= 5{,}56$\,mh & 5,56 meses \\
+\rowcolor{grisFilaImpar}
+Propio         & 4 h/PCU  & $13{,}97 \times 4 = 55{,}9$\,hh
+               & $55{,}9/0{,}4 = 139{,}7$\,hh $= 0{,}79$\,mh & 0,79 meses \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\footnotesize{* La codificación representa el 40\% del esfuerzo total
+($\text{Esfuerzo total} = \text{Esfuerzo Cod.}/0{,}4$). Tasa: 176\,hh = 1\,mes-hombre.}
+
+\normalsize
+\begin{cajaError}
+\textbf{Errores frecuentes -- Problema 2 (ATM):}
+\begin{itemize}[leftmargin=0.8cm, itemsep=0.2em]
+  \item \textbf{A2-Error 1:} Olvidar que el esfuerzo calculado con la productividad
+        es \emph{sólo el de codificación}, que representa el \textbf{40\%} del esfuerzo
+        total. El total se obtiene dividiendo entre $0{,}4$.
+  \item \textbf{A2-Error 2:} Confundir unidades: la \emph{duración} es en
+        \textbf{meses}, \emph{no} en meses-hombre. La fórmula es
+        $\text{Duración} = \text{Esfuerzo}/\text{N° personas}$, y las
+        unidades resultantes son $[\text{mes-persona}/\text{persona}] = [\text{mes}]$.
+  \item \textbf{A2-Error 3:} No considerar el actor Administrador si apareciera;
+        es un error frecuente omitir actores del diagrama al hacer la clasificación.
+\end{itemize}
+\end{cajaError}
+\fi
+% ─────────────────────────────────────────────────────────────────────────────
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\subsection*{5.3 \quad Problema 3: Sistema TPV Simplificado}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+Obtener los PCU ajustados para el sistema TPV descrito a continuación.
+Estimar el esfuerzo y la duración del proyecto.
+
+% ─── 5.3.1 Definición ────────────────────────────────────────────────────────
+\subsubsection*{5.3.1 \quad Definición del Problema}
+
+El Sr.~Vicente Pastor, dueño y administrador de un negocio minorista,
+contrata una pequeña empresa de software para desarrollar un
+\textbf{Terminal de Punto de Venta (TPV)}.
+
+El TPV es un sistema computarizado para registrar ventas y gestionar pagos.
+Incluye hardware (computadora y lector de tarjetas) y software. Su objetivo
+es proporcionar pago rápido, análisis exacto de ventas y control automático
+de existencias.
+
+% ─── 5.3.2 Requisitos ────────────────────────────────────────────────────────
+\subsubsection*{5.3.2 \quad Requisitos}
+
+\noindent\textbf{Funciones básicas:}
+\begin{itemize}[leftmargin=1.5cm, label=--]
+    \item Registrar venta de productos con código universal de producto (CUP).
+    \item Calcular el total de la venta y reducir stock.
+    \item Mostrar descripción y precio de cada producto.
+    \item Generar informes de ventas totales.
+\end{itemize}
+
+\noindent\textbf{Funciones de pago:}
+\begin{itemize}[leftmargin=1.5cm, label=--]
+    \item Gestionar pagos con tarjeta de crédito, autorizados por sistema externo.
+    \item Registrar pagos en sistema Cuentas por Cobrar (externo).
+\end{itemize}
+
+\noindent\textbf{Restricciones y prestaciones:}
+\begin{itemize}[leftmargin=1.5cm, label=--]
+    \item Multiusuario con mecanismos de comunicación entre sistemas.
+    \item Tiempo de respuesta $<5$ segundos.
+    \item Manejable con teclado y ratón. Tolerante a fallos.
+\end{itemize}
+
+% ─── 5.3.3 Características del Grupo ─────────────────────────────────────────
+\subsubsection*{5.3.3 \quad Características del Grupo de Desarrollo}
+
+\begin{cajaEnunciado}[title=Perfil del equipo -- TPV]
+\begin{itemize}[leftmargin=1cm, noitemsep]
+    \item Familiarizados con RUP; han desarrollado sistemas similares antes.
+    \item Paradigma OO (experiencia alta).
+    \item Líder del grupo con \emph{escasa experiencia}; equipo entusiasta.
+    \item Requisitos relativamente estables (se esperan algunos cambios).
+    \item Todo el grupo trabaja a \textbf{tiempo parcial} (\emph{part-time}).
+    \item Muy experimentados en el lenguaje de programación a usar.
+\end{itemize}
+\end{cajaEnunciado}
+
+% ─── 5.3.4 Diagrama de CU ────────────────────────────────────────────────────
+\subsubsection*{5.3.4 \quad Diagrama de Casos de Uso del TPV}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{images/diagrama_cu_tpv.png}
+    \caption{Diagrama de Casos de Uso del Sistema TPV Simplificado}
+    \label{fig:cu_tpv}
+\end{figure}
+
+% ─── 5.3.5 Especificación de CU ──────────────────────────────────────────────
+\subsubsection*{5.3.5 \quad Especificación de Casos de Uso}
+
+\noindent\textbf{CU\#01 -- Comprar Producto}\\[2pt]
+\begin{tabular}{@{}p{3cm}p{11cm}@{}}
+\textit{Actor principal:} & Cajero \\
+\textit{Precondiciones:} & El Sistema está en espera. \\
+\textit{Disparador:} & Se presenta un Cliente. \\
+\end{tabular}
+\begin{enumerate}[label=\arabic*., leftmargin=1.5cm, noitemsep]
+    \item El Cajero introduce código y cantidad de cada producto.
+    \item El Sistema determina el precio, incorpora descripción y calcula total.
+    \item El Cliente paga con tarjeta de crédito. Sigue en CU02.
+    \item El Sistema registra la venta en ``Ventas'' (ext.), descuenta stock y genera recibo.
+\end{enumerate}
+\textit{Extensiones:}
+\begin{itemize}[leftmargin=1.5cm, noitemsep, label=--]
+    \item \textbf{1a.} Código incorrecto $\to$ aviso al Cajero; continúa en paso 1.
+    \item \textbf{3a.} No puede pagar con tarjeta $\to$ Cajero cancela; continúa en paso 1.
+\end{itemize}
+
+\medskip\noindent\textbf{CU\#02 -- Pagar con Tarjeta de Crédito}\\[2pt]
+\begin{tabular}{@{}p{3cm}p{11cm}@{}}
+\textit{Actor principal:} & Cajero \\
+\textit{Precondiciones:} & El Sistema ha calculado el total; espera la tarjeta. \\
+\textit{Disparador:} & El Cliente entrega su tarjeta al Cajero. \\
+\end{tabular}
+\begin{enumerate}[label=\arabic*., leftmargin=1.5cm, noitemsep]
+    \item Cajero introduce datos de la tarjeta (tipo, número, cuotas).
+    \item Sistema solicita autorización al Sistema de Autorización Externo; éste autoriza.
+    \item Sistema registra el pago en Cuentas por Cobrar (ext.) y muestra autorización. Continúa en CU01 paso 4.
+\end{enumerate}
+\textit{Extensiones:}
+\begin{itemize}[leftmargin=1.5cm, noitemsep, label=--]
+    \item \textbf{2a.} Autorización rechazada $\to$ mensaje; Cajero cancela; continúa en CU01 paso 1.
+\end{itemize}
+
+\medskip\noindent\textbf{CU\#03 -- Generar Informe de Ventas Totales}\\[2pt]
+\begin{tabular}{@{}p{3cm}p{11cm}@{}}
+\textit{Actor principal:} & Administrador \\
+\textit{Precondiciones:} & El Sistema está en espera. \\
+\textit{Disparador:} & Se presenta el Administrador. \\
+\end{tabular}
+\begin{enumerate}[label=\arabic*., leftmargin=1.5cm, noitemsep]
+    \item Administrador solicita informe, introduce usuario/contraseña; Sistema valida y da acceso.
+    \item Administrador selecciona rango de fechas.
+    \item Sistema consulta a ``Ventas'' (ext.) la lista de montos por fecha del rango.
+    \item Sistema presenta la información visual e impresa. Continúa en CU01 paso 1.
+\end{enumerate}
+\textit{Extensiones:}
+\begin{itemize}[leftmargin=1.5cm, noitemsep, label=--]
+    \item \textbf{1a.} Credenciales inválidas $\to$ mensaje; continúa en paso 1.
+    \item \textbf{2a.} Rango de fechas inválido $\to$ mensaje; continúa en paso 2.
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\ifresolucion
+% ─────────────────────────────────────────────────────────────────────────────
+\subsubsection*{Resolución -- Problema 3: Sistema TPV}
+
+\paragraph{Pasos 1 y 2: Actores y UAW}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Clasificación de Actores -- TPV}
+\label{tab:actores_tpv}
+\begin{tabular}{p{3.8cm} p{4.5cm} c c c}
+\toprule
+\cabTbl{Actor} & \cabTbl{Tipo de Interfaz} & \cabTbl{Categoría} &
+\cabTbl{Peso} & \cabTbl{Cantidad} \\
+\midrule
+\rowcolor{grisFilaImpar}
+Cajero & Interfaz gráfica (GUI) & Complejo & 3 & 1 \\
+Administrador & Interfaz gráfica (GUI) & Complejo & 3 & 1 \\
+\rowcolor{grisFilaImpar}
+Sist. Ventas & Sistema externo (API) & Simple & 1 & 1 \\
+Sist. Autorización & Sistema externo (API) & Simple & 1 & 1 \\
+\rowcolor{grisFilaImpar}
+Cuentas por Cobrar & Sistema externo (API) & Simple & 1 & 1 \\
+\midrule
+\multicolumn{4}{r}{\textbf{UAW}} & \textbf{9} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{cajaError}
+\textbf{Error frecuente A3:} Omitir el actor \textbf{Administrador} (peso = 3) de la
+tabla de actores. Es un error documentado en las correcciones: el Administrador
+interactúa via GUI en CU03, por lo que es un actor Complejo. Olvidarlo reduce el
+UAW en 3 puntos y subestima el proyecto.
+\end{cajaError}
+
+\begin{cajaFormula}
+\[ \text{UAW} = 1\times 3 + 1\times 3 + 1\times 1 + 1\times 1 + 1\times 1 = \mathbf{9} \]
+\end{cajaFormula}
+
+\paragraph{Pasos 3 y 4: Casos de Uso y UUCW}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Clasificación de Casos de Uso -- TPV}
+\label{tab:cu_tpv}
+\begin{tabular}{p{0.7cm} p{3.8cm} p{4.5cm} c c c}
+\toprule
+\cabTbl{CU\#} & \cabTbl{Nombre} & \cabTbl{Justificación} &
+\cabTbl{Tx} & \cabTbl{Categoría} & \cabTbl{Peso} \\
+\midrule
+\rowcolor{grisFilaImpar}
+01 & Comprar Producto & 3 pasos en EPE (antes de include CU02) & 3 & Simple & 5 \\
+02 & Pagar con Tarjeta & 3 pasos principales (entrar datos, autorizar, registrar) & 3 & Simple & 5 \\
+\rowcolor{grisFilaImpar}
+03 & Generar Informe   & 3 pasos en EPE (autenticar, seleccionar fechas, presentar) & 3 & Simple & 5 \\
+\midrule
+\multicolumn{5}{r}{\textbf{UUCW}} & \textbf{15} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textit{Nota:} Si CU02 se considera con mayor detalle (datos de tarjeta + validación +
+registro en Cuentas Cobrar = 4 transacciones), se clasifica como \textbf{Medio} (10 pts),
+lo que haría UUCW = 20. Ambas interpretaciones son válidas; se documenta la preferencia
+del equipo.
+
+\begin{cajaFormula}
+\[ \text{UUCP} = \text{UAW} + \text{UUCW} = 9 + 15 = \mathbf{24}
+   \quad\text{(ó 29 si CU02 es Medio)} \]
+\end{cajaFormula}
+
+\paragraph{Paso 6: Factor Técnico (TCF) -- TPV}
+
+A diferencia del ATM, el TPV tiene distribución, multiusuario, rendimiento estricto
+y múltiples sistemas externos.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Factores de Complejidad Técnica -- TPV}
+\label{tab:tcf_tpv}
+\begin{tabular}{c p{5.5cm} c c c}
+\toprule
+\cabTbl{Factor} & \cabTbl{Descripción} & \cabTbl{Peso} &
+\cabTbl{Eval.} & \cabTbl{Pond.} \\
+\midrule
+\rowcolor{grisFilaImpar}
+T1  & Sistema distribuido (múlt. ext.)  & 2.0 & 6  & 12.0 \\
+T2  & Rendimiento (resp. $<5$\,s)        & 1.0 & 10 & 10.0 \\
+\rowcolor{grisFilaImpar}
+T3  & Eficiencia para el usuario        & 1.0 & 5  & 5.0 \\
+T4  & Procesamiento interno complejo    & 1.0 & 3  & 3.0 \\
+\rowcolor{grisFilaImpar}
+T5  & Código reutilizable               & 1.0 & 3  & 3.0 \\
+T6  & Facilidad de instalación          & 0.5 & 3  & 1.5 \\
+\rowcolor{grisFilaImpar}
+T7  & Facilidad de uso                  & 0.5 & 5  & 2.5 \\
+T8  & Portabilidad                      & 2.0 & 0  & 0.0 \\
+\rowcolor{grisFilaImpar}
+T9  & Facilidad de modificación         & 1.0 & 4  & 4.0 \\
+T10 & Concurrencia (multiusuario)       & 1.0 & 5  & 5.0 \\
+\rowcolor{grisFilaImpar}
+T11 & Seguridad (tarjetas)              & 1.0 & 5  & 5.0 \\
+T12 & Acceso a código de terceros       & 1.0 & 5  & 5.0 \\
+\rowcolor{grisFilaImpar}
+T13 & Formación del usuario             & 1.0 & 3  & 3.0 \\
+\midrule
+\multicolumn{4}{r}{\textbf{TF}} & \textbf{59.0} \\
+\midrule
+\multicolumn{5}{r}{$\text{TCF} = 0{,}06 + 0{,}01 \times 59{,}0 = \mathbf{0{,}65}$}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{cajaFormula}
+\[ \text{TCF} = 0{,}06 + 0{,}01 \times 59 = \mathbf{0{,}65} \]
+\end{cajaFormula}
+
+\paragraph{Paso 7: Factor de Entorno (ECF) -- TPV}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Factores de Entorno -- TPV}
+\label{tab:ecf_tpv}
+\begin{tabular}{c p{5.5cm} c c c}
+\toprule
+\cabTbl{Factor} & \cabTbl{Descripción} & \cabTbl{Peso} &
+\cabTbl{Eval.} & \cabTbl{Pond.} \\
+\midrule
+\rowcolor{grisFilaImpar}
+E1 & Familiaridad con el proceso (RUP)   & 1.5  & 4 &  6.0 \\
+E2 & Experiencia en el dominio (TPV)     & 0.5  & 4 &  2.0 \\
+\rowcolor{grisFilaImpar}
+E3 & Experiencia en OO (alta)            & 1.0  & 5 &  5.0 \\
+E4 & Capacidad líder (escasa experiencia)& 0.5  & 1 &  0.5 \\
+\rowcolor{grisFilaImpar}
+E5 & Motivación (equipo entusiasta)      & 1.0  & 4 &  4.0 \\
+E6 & Estabilidad de requisitos           & 2.0  & 3 &  6.0 \\
+\rowcolor{grisFilaImpar}
+E7 & Trabajo a tiempo parcial            & -1.0 & 3 & -3.0 \\
+E8 & Dificultad del lenguaje (experim.)  & -1.0 & 0 &  0.0 \\
+\midrule
+\multicolumn{4}{r}{\textbf{EF}} & \textbf{20.5} \\
+\midrule
+\multicolumn{5}{r}{$\text{ECF} = 1{,}4 - 0{,}03 \times 20{,}5 = \mathbf{0{,}785}$}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{cajaFormula}
+\[ \text{ECF} = 1{,}4 - 0{,}03 \times 20{,}5 = \mathbf{0{,}785} \]
+\end{cajaFormula}
+
+\paragraph{Paso 8: PCU Ajustados (AUCP) -- TPV}
+
+\begin{cajaFormula}
+\[ \text{AUCP} = 24 \times 0{,}65 \times 0{,}785 = \mathbf{12{,}25}
+   \quad\text{(ó } 29\times 0{,}65\times 0{,}785 = 14{,}81\text{ con UUCW=20)} \]
+\end{cajaFormula}
+
+\paragraph{Pasos 9 y 10: Estimación del Esfuerzo y Duración -- TPV}
+
+Se trabaja con \textbf{2 personas} a tiempo parcial (grupo pequeño).
+
+\begin{table}[H]
+\centering
+\small
+\caption{Estimación del Esfuerzo y Duración -- TPV (AUCP = 12{,}25)}
+\label{tab:esfuerzo_tpv}
+\begin{tabular}{l c c c c c}
+\toprule
+\cabTbl{Modelo} & \cabTbl{h/PCU} & \cabTbl{Esfuerzo Cod.}
+& \cabTbl{Esfuerzo Total} & \cabTbl{N° Pers.} & \cabTbl{Duración} \\
+\midrule
+\rowcolor{grisFilaImpar}
+Karner  & 20 & $245{,}0$\,hh & $612{,}5$\,hh = 3,48\,mh & 2 & 1,74 meses \\
+Sch\&Win & 28 & $343{,}0$\,hh & $857{,}5$\,hh = 4,87\,mh & 2 & 2,43 meses \\
+\rowcolor{grisFilaImpar}
+Propio  & 5,6 & $68{,}6$\,hh & $171{,}5$\,hh = 0,97\,mh & 2 & 0,49 meses \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{cajaError}
+\textbf{Errores frecuentes -- Problema 3 (TPV):}
+\begin{itemize}[leftmargin=0.8cm, itemsep=0.2em]
+  \item \textbf{A3-Error 1 (documentado):} No contabilizar el
+        \textbf{actor Administrador} (peso=3) al construir la tabla de actores.
+        Verificar siempre que todos los actores que aparecen en los CU estén incluidos.
+  \item \textbf{A3-Error 2:} Asignar portabilidad (T8) alta cuando el problema
+        dice que el sistema será instalado en un punto de venta fijo $\Rightarrow$ T8=0.
+  \item \textbf{A3-Error 3:} No aplicar la corrección del $40\%$ del esfuerzo de
+        codificación para obtener el esfuerzo total del proyecto.
+  \item \textbf{A3-Error 4:} Dividir el esfuerzo total en meses-hombre entre el
+        número de personas para obtener la duración en meses.
+        La duración en meses $\neq$ los meses-hombre.
+\end{itemize}
+\end{cajaError}
+\fi
+% ─────────────────────────────────────────────────────────────────────────────
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\ifresolucion
+\subsection*{Resumen Comparativo de Estimaciones}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+\begin{table}[H]
+\centering
+\small
+\caption{Cuadro Comparativo -- ATM vs. TPV}
+\label{tab:comparativo}
+\begin{tabular}{l c c}
+\toprule
+\cabTbl{Concepto} & \cabTbl{ATM} & \cabTbl{TPV} \\
+\midrule
+\rowcolor{grisFilaImpar}
+UAW (actores ponderados)   & 5  & 9 \\
+UUCW (CU ponderados)       & 30 & 15 (ó 20) \\
+\rowcolor{grisFilaImpar}
+UUCP (sin ajuste)          & 35 & 24 (ó 29) \\
+TCF                        & 0,39 & 0,65 \\
+\rowcolor{grisFilaImpar}
+ECF                        & 1,025 & 0,785 \\
+\textbf{AUCP (ajustados)}  & \textbf{13,97} & \textbf{12,25} \\
+\rowcolor{grisFilaImpar}
+Esfuerzo cod. (Karner 20h) & 279,4\,hh & 245,0\,hh \\
+Esfuerzo total (Karner)    & 698,5\,hh & 612,5\,hh \\
+\rowcolor{grisFilaImpar}
+Duración (Karner, 1 pers.) & 3,97 meses & 1,74 meses (2 pers.)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Interpretación:} A pesar de tener menos casos de uso, el TPV resulta
+más complejo técnicamente (TCF mayor por distribución, concurrencia y seguridad), pero
+el equipo más experimentado (ECF menor) y el mayor tamaño del grupo compensa parcialmente.
+\fi
+
+\end{document}

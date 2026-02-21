@@ -1,0 +1,80 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{formato_catedra}
+
+% ==========================================================
+% CONFIGURACIÓN DE MODO: ¿Cuestionario o Resolución?
+% ==========================================================
+\newif\ifresolucion
+%\resoluciontrue % <--- Cambia a \resolucionfalse para ocultar respuestas
+% ==========================================================
+
+\Lectura{Lectura I\_L3}
+
+\ifresolucion
+    \TituloDocumento{EQUIPOS DE TRABAJO \\ {\small (Resolución)}}
+\else
+    \TituloDocumento{EQUIPOS DE TRABAJO \\ {\small (Cuestionario)}}
+\fi
+
+\begin{document}
+
+\HacerTitulo
+
+\section*{1 \quad CONTENIDO}
+Factores humanos, rasgos del profesional, psicología de equipo, toxicidad y paradigmas organizacionales en la ingeniería de software.
+
+\section*{2 \quad OBJETIVOS}
+\begin{itemize}[leftmargin=1.5cm, label=--]
+    \item \textbf{Identificar} los rasgos de personalidad y competencias del ingeniero profesional.
+    \item \textbf{Analizar} las dinámicas de grupo, factores de eficacia y toxicidad.
+    \item \textbf{Diferenciar} los paradigmas de organización de equipos de desarrollo.
+\end{itemize}
+
+\section*{3 \quad METODOLOGÍA}
+Lectura técnica y resolución de cuestionario basado en Pressman (9na Ed.).
+
+\section*{4 \quad BIBLIOGRAFÍA}
+\nocite{pressman2021_cap24} 
+\printbibliography[heading=none]
+
+\section*{5 \quad ACTIVIDADES}
+
+\subsection*{5.1 \quad Lectura sobre Pressman (9na Edición)}
+\begin{enumerate}[label=5.1.\arabic*, leftmargin=1.5cm]
+    \item \textbf{¿Qué rasgos personales debe poseer un ingeniero de software profesional?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 24.1.1]} Debe poseer un fuerte sentido de responsabilidad individual, curiosidad técnica y una mentalidad pragmática. Además, debe mostrar resiliencia ante la frustración, honestidad intelectual y una alta capacidad para el trabajo colaborativo. \fi
+
+    \item \textbf{¿Cómo define el autor la psicología de la ingeniería de software?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 24.1]} Se define como el estudio de los procesos cognitivos y sociales que influyen en los individuos que construyen sistemas complejos. Se enfoca en cómo los ingenieros perciben la información y cómo las estructuras sociales afectan la calidad técnica. \fi
+
+    \item \textbf{¿Qué características posee un equipo eficaz?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 24.3.1]} Se fundamenta en siete factores: sentido de propósito, confianza, comunicación abierta, sentido de compromiso, habilidades equilibradas, autoorganización y propiedad compartida del código. \fi
+
+    \item \textbf{¿A qué se le llama la toxicidad del equipo?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 24.3.1]} Son factores que destruyen la moral, como: una atmósfera de trabajo frenética, falta de confianza en los líderes, desprecio por ideas ajenas y fragmentación del equipo. Esto produce un decaimiento en la calidad y la productividad. \fi
+
+    \item \textbf{¿Cómo se puede evitar frustraciones en el equipo de trabajo?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 24.3]} Se logra fijando objetivos realistas, dando autonomía para tomar decisiones técnicas críticas y asegurando que los desarrolladores tengan acceso a las herramientas y el tiempo necesario para realizar un trabajo de calidad. \fi
+
+    \item \textbf{Describa los paradigmas organizacionales que cita el autor.} 
+    \ifresolucion \\
+    \textbf{[Cap. 24.3.2]} Constantine define cuatro:
+    \begin{itemize}
+        \item \textbf{Cerrado:} Jerarquía tradicional de control; ideal para problemas que requieren eficiencia pero no innovación radical.
+        \item \textbf{Aleatorio:} Basado en la iniciativa individual; excelente para la innovación pero difícil de coordinar en proyectos grandes.
+        \item \textbf{Abierto:} Basado en la colaboración y el consenso; maximiza la comunicación pero requiere alta madurez.
+        \item \textbf{Síncrono:} Se coordina mediante la compartimentación del problema, con poca comunicación cruzada innecesaria.
+    \end{itemize} 
+     \fi
+
+    \item \textbf{¿Cómo es el equipo de Programador jefe y a qué paradigma corresponde?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 24.3.2]} Es una estructura donde un ingeniero senior ("jefe") es el responsable total del diseño y código, apoyado por roles secundarios (bibliotecario, editor, etc.). Por su jerarquía centralizada y control rígido, corresponde al \textbf{Paradigma Cerrado}. \fi
+\end{enumerate}
+
+\end{document}

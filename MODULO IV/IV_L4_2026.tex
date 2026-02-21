@@ -1,0 +1,85 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{formato_catedra}
+\usepackage{hyperref}
+
+% ==========================================================
+% CONFIGURACIÓN DE MODO: ¿Cuestionario o Resolución?
+% ==========================================================
+\newif\ifresolucion
+%\resoluciontrue % <--- Cambia a \resolucionfalse para ocultar respuestas
+% ==========================================================
+
+\Lectura{Lectura IV\_L4}
+
+\ifresolucion
+    \TituloDocumento{ESTRATEGIA Y TÉCNICAS DE TESTING \\ {\small (Resolución)}}
+\else
+    \TituloDocumento{ESTRATEGIA Y TÉCNICAS DE TESTING \\ {\small (Cuestionario)}}
+\fi
+
+\begin{document}
+
+\HacerTitulo
+
+\section*{1 \quad CONTENIDO}
+Estrategias de prueba de software, niveles de prueba (unitarias, integración, sistema), Desarrollo Dirigido por Pruebas (TDD) y estándares internacionales de certificación (ISTQB).
+
+\section*{2 \quad OBJETIVOS}
+\begin{itemize}[leftmargin=1.5cm, label=--]
+    \item \textbf{Diferenciar} los niveles de prueba y el valor de la independencia en el testing.
+    \item \textbf{Comprender} el flujo de trabajo del Desarrollo Dirigido por Pruebas (TDD).
+    \item \textbf{Incorporar} la terminología y principios fundamentales del estándar internacional ISTQB.
+\end{itemize}
+
+\section*{3 \quad METODOLOGÍA}
+Lectura crítica y resolución de cuestionario basado en bibliografía técnica actualizada y manuales de estándares industriales.
+
+\section*{4 \quad BIBLIOGRAFÍA}
+\nocite{pressman2021_1718, bahit2012_tdd_cap, istqb_foundation_2023_cap1}
+\printbibliography[heading=none]
+
+\section*{5 \quad ACTIVIDADES}
+
+\subsection*{5.1 \quad Sobre Pressman (9na Edición)}
+\begin{enumerate}[label=5.1.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Qué características debe tener una plantilla para pruebas?}
+    \ifresolucion \\ \textbf{[Cap. 17]} Debe incluir obligatoriamente: identificador único, requisitos asociados, escenario de prueba, datos de entrada, pasos de ejecución, resultados esperados y el resultado real tras la ejecución. \fi
+
+    \item \textbf{¿Por qué es recomendable que las pruebas las realice un grupo independiente (GIP)?}
+    \ifresolucion \\ \textbf{[Cap. 17.1]} Para garantizar la objetividad. El desarrollador tiende a verificar que su código "funciona"; el Grupo Independiente de Prueba tiene la misión de encontrar errores, eliminando el sesgo de autoría y el conflicto de intereses. \fi
+
+    \item \textbf{¿Qué aspectos son necesarios para implementar una estrategia de pruebas exitosa?}
+    \ifresolucion \\ \textbf{[Cap. 17.2]} 1) Especificar requisitos medibles. 2) Establecer objetivos de prueba explícitos. 3) Comprender al usuario final. 4) Crear un plan de prueba que favorezca el aprendizaje y la mejora continua. \fi
+
+    \item \textbf{Explique qué es una prueba de unidad (o “prueba unitaria”).}
+    \ifresolucion \\ \textbf{[Cap. 18.2]} Es la verificación del componente más pequeño del diseño (módulo o clase). Se centra en probar la lógica interna, las estructuras de datos locales y el manejo de excepciones de forma aislada. \fi
+
+    \item \textbf{¿Cuál es el inconveniente que puede surgir en una prueba de integración descendente?}
+    \ifresolucion \\ \textbf{[Cap. 17.3]} El retraso en la prueba de módulos críticos de bajo nivel (donde suele estar la lógica compleja). Esto requiere el desarrollo de "stubs" o módulos simulados que añaden sobrecarga al proceso. \fi
+
+\end{enumerate}
+
+\subsection*{5.2 \quad Sobre Eugenia Bahit (TDD)}
+\begin{enumerate}[label=5.2.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Qué es el Desarrollo Dirigido por Pruebas (TDD)?}
+    \ifresolucion \\ \textbf{[Cap. TDD]} Es una práctica donde se escribe primero una prueba automatizada que define una mejora o función nueva, se verifica que falle (Rojo), se escribe el código mínimo para que pase (Verde) y finalmente se optimiza (Refactorización). \fi
+
+    \item \textbf{¿Cuáles son las ventajas de implementar el desarrollo TDD?}
+    \ifresolucion \\ Genera código más limpio y modular, proporciona una suite de pruebas de regresión constante y reduce drásticamente el costo de mantenimiento a largo plazo. \fi
+
+\end{enumerate}
+
+\subsection*{5.3 \quad Sobre ISTQB (Fundamentos Profesionales)}
+\begin{enumerate}[label=5.3.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Cuál es la diferencia entre Testing y Depuración (Debugging)?}
+    \ifresolucion \\ \textbf{[ISTQB Cap. 1]} El \textbf{Testing} es el proceso sistemático para identificar fallas y evaluar la calidad. El \textbf{Debugging} es la acción de los desarrolladores para localizar la causa raíz de un error, analizarlo y corregirlo. \fi
+
+    \item \textbf{Explique el principio de la "Paradoja del Pesticida".}
+    \ifresolucion \\ \textbf{[ISTQB Cap. 1.3]} Establece que si las mismas pruebas se repiten constantemente, el sistema se vuelve "inmune" y las pruebas dejan de encontrar defectos nuevos. Por ello, los casos de prueba deben evolucionar y variar con el tiempo. \fi
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,74 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{formato_catedra}
+\usepackage{hyperref}
+
+% ==========================================================
+% CONFIGURACIÓN DE MODO: ¿Cuestionario o Resolución?
+% ==========================================================
+\newif\ifresolucion
+%\resoluciontrue % <--- Cambia a \resolucionfalse para ocultar respuestas
+% ==========================================================
+
+\Lectura{Lectura IV\_L3}
+
+\ifresolucion
+    \TituloDocumento{REVISIONES TÉCNICAS \\ {\small (Resolución)}}
+\else
+    \TituloDocumento{REVISIONES TÉCNICAS \\ {\small (Cuestionario)}}
+\fi
+
+\begin{document}
+
+\HacerTitulo
+
+\section*{1 \quad CONTENIDO}
+Conceptos de revisiones técnicas, detección de errores, Revisiones Técnicas Formales (RTF) y la evolución hacia las revisiones ágiles de código.
+
+\section*{2 \quad OBJETIVOS}
+\begin{itemize}[leftmargin=1.5cm, label=--]
+    \item \textbf{Diferenciar} los tipos de revisiones y su impacto en la calidad.
+    \item \textbf{Comprender} el proceso de una Revisión Técnica Formal.
+    \item \textbf{Analizar} las directrices modernas para revisiones de código efectivas.
+\end{itemize}
+
+\section*{3 \quad METODOLOGÍA}
+Lectura analítica de Pressman (9na Ed.) y guías de buenas prácticas de la industria.
+
+\section*{4 \quad BIBLIOGRAFÍA}
+\nocite{pressman2021_16,google_code_review}
+\printbibliography[heading=none]
+
+\section*{5 \quad ACTIVIDADES}
+
+\subsection*{5.1 \quad Sobre Pressman (9na Edición)}
+\begin{enumerate}[label=5.1.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Qué es una revisión técnica?}
+    \ifresolucion \\ \textbf{[Cap. 16.1]} Es un filtro para la ingeniería de software cuyo objetivo es descubrir errores en el análisis, diseño y codificación. Se considera el mecanismo más eficaz para garantizar la calidad del producto de trabajo. \fi
+
+    \item \textbf{¿Cuál es la diferencia entre falla y error?}
+    \ifresolucion \\ \textbf{[Cap. 16.1.2]} Un **error** es un problema de calidad descubierto por los ingenieros antes de que el software se entregue al usuario final. Una **falla** es un problema de calidad detectado por los usuarios después de que el software ha sido liberado. \fi
+
+    \item \textbf{¿Qué es una Revisión Técnica Formal (RTF) y cuáles son sus objetivos?}
+    \ifresolucion \\ \textbf{[Cap. 16.2]} Es una actividad de SQA realizada por ingenieros de software. Sus objetivos son: 1) Descubrir errores en funciones o lógica, 2) Verificar que el software cumpla los requisitos, 3) Asegurar que se sigan los estándares predefinidos y 4) Lograr un software desarrollado de manera uniforme. \fi
+
+    \item \textbf{¿Cuáles son las directrices para una RTF efectiva?}
+    \ifresolucion \\ \textbf{[Cap. 16.2.2]} 1) Revisar el producto, no al productor. 2) Establecer una agenda y mantenerla. 3) Limitar el debate y las refutaciones. 4) Enunciar áreas de problemas, pero no intentar resolverlos en la reunión. 5) Tomar notas escritas. 6) Limitar el número de participantes y la duración. \fi
+
+\end{enumerate}
+
+\subsection*{5.2 \quad Revisiones Modernas (Google Engineering Practices)}
+\begin{enumerate}[label=5.2.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Cuál es el propósito principal de una revisión de código moderna?}
+    \ifresolucion \\ El propósito principal es mejorar la calidad general del código del proyecto. Además, sirve para asegurar que el código sea mantenible, educar al autor del código y compartir el conocimiento técnico entre el equipo. \fi
+
+    \item \textbf{¿Qué se debe revisar en un Code Review?}
+    \ifresolucion \\ Se debe evaluar: 1) Diseño (¿es lógica la solución?), 2) Funcionalidad (¿hace lo que debe?), 3) Complejidad (¿podría ser más simple?), 4) Pruebas (¿están bien diseñadas?) y 5) Estilo (¿cumple las guías del equipo?). \fi
+
+    \item \textbf{¿Cómo debe ser el tono y la comunicación durante la revisión?}
+    \ifresolucion \\ Debe ser profesional, amable y constructivo. Se deben evitar ataques personales y usar comentarios basados en hechos o estándares de codificación, no en opiniones subjetivas. \fi
+
+\end{enumerate}
+
+\end{document}

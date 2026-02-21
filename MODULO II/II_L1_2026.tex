@@ -1,0 +1,83 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{formato_catedra}
+
+% ==========================================================
+% CONFIGURACIÓN DE MODO: ¿Cuestionario o Resolución?
+% ==========================================================
+\newif\ifresolucion
+\resoluciontrue % <--- Cambia a \resolucionfalse para ocultar respuestas
+% ==========================================================
+
+\Lectura{Lectura II\_L1}
+
+\ifresolucion
+    \TituloDocumento{MÉTRICAS Y PLANIFICACIÓN DE PROYECTOS \\ {\small (Resolución)}}
+\else
+    \TituloDocumento{MÉTRICAS Y PLANIFICACIÓN DE PROYECTOS \\ {\small (Cuestionario)}}
+\fi
+
+\begin{document}
+
+\HacerTitulo
+
+\section*{1 \quad CONTENIDO}
+Gestión de proyectos, métricas de estimación (PF, PCU) y planificación temporal (Ruta Crítica).
+
+\section*{2 \quad OBJETIVOS}
+\begin{itemize}[leftmargin=1.5cm, label=--]
+    \item \textbf{Aplicar} técnicas cuantitativas para estimar esfuerzo y costo.
+    \item \textbf{Comprender} los principios de calendarización y recursos.
+    \item \textbf{Identificar} tareas críticas mediante el análisis de interdependencias.
+\end{itemize}
+
+\section*{3 \quad METODOLOGÍA}
+Lectura técnica y resolución de cuestionario basado en Pressman (9na Ed.).
+
+\section*{4 \quad BIBLIOGRAFÍA}
+\nocite{pressman2021_cap25}
+\printbibliography[heading=none]
+
+\section*{5 \quad ACTIVIDADES}
+
+\subsection*{5.1 \quad Cuestionario de Planificación y Estimación (Pressman 9na Ed.)}
+\begin{enumerate}[label=5.1.\arabic*, leftmargin=1.5cm]
+
+    \item \textbf{¿Qué factores afectan la estimación de software?} 
+    \ifresolucion \\ \textbf{[Cap. 25]} La complejidad del sistema, el grado de incertidumbre en los requisitos, la estabilidad del entorno y la disponibilidad de datos históricos de proyectos previos. \fi
+
+    \item \textbf{¿Cuál es el objetivo de la planificación de proyectos?} 
+    \ifresolucion \\ \textbf{[Cap. 25]} Proporcionar un marco de trabajo que permita realizar estimaciones razonables de recursos, costos y plazos para establecer una base de control y seguimiento. \fi
+
+    \item \textbf{¿Cuáles son las tareas que se realizan en una planificación?} 
+    \ifresolucion \\ \textbf{[Cap. 25]} Definición del alcance, análisis de factibilidad, estimación de recursos, análisis de riesgos y desarrollo del calendario del proyecto. \fi
+
+    \item \textbf{¿Qué se define en el alcance del proyecto?} 
+    \ifresolucion \\ \textbf{[Cap. 25]} Las funciones y características del software, los objetos de datos de entrada/salida, el rendimiento esperado y las interfaces externas del sistema. \fi
+
+    \item \textbf{¿Cuáles son las categorías principales de recursos?} 
+    \ifresolucion 
+    \begin{itemize}
+        \item \textbf{Personal:} Expertos necesarios según el dominio del software.
+        \item \textbf{Software reutilizable:} Componentes o bloques de construcción existentes.
+        \item \textbf{Entorno:} Herramientas CASE, hardware y red necesarios para la ingeniería.
+    \end{itemize} \fi
+
+    \item \textbf{¿Qué es la métrica de Puntos de Función (PF)?} 
+    \ifresolucion \\ \textbf{[Cap. 25]} Es una métrica de tamaño indirecta basada en la funcionalidad entregada (entradas, salidas, consultas, archivos) que permite estimar el esfuerzo antes de codificar. \fi
+
+    \item \textbf{¿Cómo se obtienen los Puntos de Casos de Uso (PCU)?} 
+    \ifresolucion \\ \textbf{[Cap. 25]} Se clasifican actores y casos de uso por complejidad para obtener los puntos sin ajustar, aplicándoles luego factores técnicos y ambientales de la organización. \fi
+
+    \item \textbf{¿Cuáles son los principios básicos de la planificación temporal?} 
+    \ifresolucion \\ \textbf{[Cap. 26]} Compartimentación de tareas (WBS), análisis de interdependencias, asignación de tiempo, validación del esfuerzo, definición de responsabilidades e hitos. 
+    
+     \fi
+
+    \item \textbf{¿Cuál es la importancia de la Ruta Crítica en la gestión del cronograma?} 
+    \ifresolucion \\ \textbf{[Cap. 26]} Identifica la secuencia de tareas que no tienen holgura; cualquier retraso en estas actividades pospone inevitablemente la fecha de entrega final del proyecto. 
+    
+     \fi
+
+\end{enumerate}
+
+\end{document}

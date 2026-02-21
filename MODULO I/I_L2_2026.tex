@@ -1,0 +1,87 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{formato_catedra}
+
+% ==========================================================
+% CONFIGURACIÓN DE MODO: ¿Cuestionario o Resolución?
+% ==========================================================
+\newif\ifresolucion
+\resoluciontrue % <--- Cambia a \resolucionfalse para ocultar respuestas
+% ==========================================================
+
+\Lectura{Lectura I\_L2}
+
+\ifresolucion
+    \TituloDocumento{CICLOS DE VIDA Y METODOLOGÍAS DE DESARROLLO \\ {\small (Resolución)}}
+\else
+    \TituloDocumento{CICLOS DE VIDA Y METODOLOGÍAS DE DESARROLLO \\ {\small (Cuestionario)}}
+\fi
+
+\begin{document}
+
+\HacerTitulo
+
+\section*{1 \quad CONTENIDO}
+Modelos de proceso prescriptivos (Cascada, V), modelos incrementales y modelos evolutivos (Prototipado, Espiral).
+
+\section*{2 \quad OBJETIVOS}
+\begin{itemize}[leftmargin=1.5cm, label=--]
+    \item \textbf{Diferenciar} los flujos de proceso lineales frente a los iterativos.
+    \item \textbf{Analizar} el valor del prototipado en la captura de requisitos.
+    \item \textbf{Comprender} la gestión de riesgos dentro del modelo en espiral.
+\end{itemize}
+
+\section*{3 \quad METODOLOGÍA}
+Lectura técnica y resolución de cuestionario basado en Pressman (9na Ed.).
+
+\section*{4 \quad BIBLIOGRAFÍA}
+\nocite{pressman2021_cap2_4}
+\printbibliography[heading=none]
+
+\section*{5 \quad ACTIVIDADES}
+
+\subsection*{5.1 \quad Lectura sobre Pressman (9na Edición)}
+\begin{enumerate}[label=5.1.\arabic*, leftmargin=1.5cm]
+    \item \textbf{¿Qué son los modelos de procesos descriptivos (o prescriptivos)?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 4: Modelos de proceso]} Son marcos de trabajo que definen un conjunto de actividades, acciones, tareas y productos de trabajo. Buscan establecer una estructura sistemática para el desarrollo, mejorando la predictibilidad y calidad del software. \fi
+
+    \item \textbf{¿Qué es el modelo en Cascada y qué diferencia hay con el modelo en V?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 24]} El modelo en \textbf{Cascada} propone un enfoque lineal y secuencial. El \textbf{Modelo en V} es una variación que resalta la relación directa entre las fases de desarrollo y las actividades de prueba (verificación y validación).
+    
+    
+
+[Image of the V-Model of software development]
+ \fi
+
+    \item \textbf{¿En qué casos se puede utilizar modelos de procesos incrementales?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 24]} Cuando los requisitos principales están bien definidos pero el tiempo para una entrega completa es corto. Es ideal para entregar un "núcleo operativo" temprano al cliente. \fi
+
+    \item \textbf{¿Cuál es el objetivo principal de los modelos incrementales?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 24]} Producir un producto operativo en etapas sucesivas. Cada incremento añade funcionalidad sobre el anterior, permitiendo obtener retroalimentación y valor de negocio de forma temprana. \fi
+
+    \item \textbf{¿Cuándo es necesario utilizar un modelo evolutivo?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 24]} Cuando los requisitos del sistema no están definidos completamente o se espera que cambien significativamente. El software se desarrolla a través de versiones iterativas que crecen en complejidad. \fi
+
+    \item \textbf{¿Qué problemática puede aparejar la utilización de prototipos?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 4]} 1) El cliente puede confundir el prototipo con la versión final y exigir su entrega inmediata; 2) El desarrollador puede utilizar implementaciones deficientes para hacerlo funcionar rápido, afectando la calidad interna. \fi
+
+    \item \textbf{¿Para qué se utiliza el prototipado en un modelo en espiral?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 24]} Se utiliza como una herramienta crítica para la \textbf{reducción de riesgos}. Permite evaluar aspectos técnicos o de usuario inciertos en cada ciclo de la espiral antes de avanzar a fases de mayor inversión.
+    
+    
+
+[Image of the Spiral Model of software development]
+ \fi
+
+    \item \textbf{¿Cuáles son las debilidades de los procesos evolutivos?} 
+    \ifresolucion \\ 
+    \textbf{[Cap. 24]} La dificultad para determinar el costo y tiempo final debido a la incertidumbre del número de iteraciones, y la necesidad de una gestión de riesgos experta para evitar que el proceso se vuelva caótico. \fi
+\end{enumerate}
+
+\end{document}
