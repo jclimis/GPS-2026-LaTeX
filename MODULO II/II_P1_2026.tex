@@ -1,22 +1,7 @@
 \documentclass[11pt, a4paper]{article}
 \usepackage{formato_catedra}
-
 % ─── Paquetes adicionales ────────────────────────────────────────────────────
-\usepackage{booktabs}
-\usepackage{multirow}
-\usepackage{multicol}
-\usepackage{array}
-\usepackage{longtable}
-\usepackage{xcolor}
-\usepackage[most]{tcolorbox}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{float}
-\usepackage{caption}
-\usepackage{subcaption}
-\usepackage{hyperref}
-\usepackage{tabularx}
-\usepackage{colortbl}
+
 
 % ─── Configuración de colores temáticos ─────────────────────────────────────
 \definecolor{azulCatedra}{RGB}{26,82,118}
@@ -51,14 +36,18 @@
 }
 
 \newtcolorbox{cajaFormula}[1][]{
-    enhanced,
-    colback=azulClaro!50,
-    colframe=azulCatedra,
-    fonttitle=\bfseries\small,
-    title={Fórmula},
-    before upper={\centering},
-    #1
+	enhanced,
+	colback=azulClaro!50,
+	colframe=azulCatedra,
+	fonttitle=\bfseries\small,
+	title={Fórmula},
+	halign=center,       % <--- Centrado automático de todo el contenido
+	sharp corners=south, % Opcional: un toque estético
+	before skip=10pt,
+	after skip=10pt,
+	#1
 }
+
 
 \newtcolorbox{cajaEnunciado}[1][]{
     enhanced, breakable,
@@ -75,7 +64,7 @@
 % ─── CONFIGURACIÓN DEL MODO (Enunciado / Resolución) ─────────────────────────
 % Cambia a \resolucionfalse para generar sólo el enunciado
 \newif\ifresolucion
-\resoluciontrue
+\resolucionfalse
 
 % ─── Metadatos del documento ─────────────────────────────────────────────────
 \Lectura{Práctico II\_P1}
@@ -130,7 +119,8 @@ PCU en forma completa, desde la clasificación de actores hasta la duración del
 % ─────────────────────────────────────────────────────────────────────────────
 \nocite{karner1993,cohn2013ucp,anda2001industry,pressman2021_cap25,
         schneider1998applying,cockburn2001writing}
-\printbibliography
+\bibliographystyle{plain}
+\bibliography{referencias}
 
 \vspace{0.5em}
 \noindent\textbf{Nota bibliográfica:} La productividad de referencia de Karner
@@ -513,10 +503,10 @@ Se cuenta el número de transacciones del \emph{Escenario Principal Exitoso}
     \item Complejo: $>7$ transacciones $\Rightarrow$ 15 puntos.
 \end{itemize}
 
-\paragraph{Paso 5: Puntos de CU Sin Ajuste (UUCP)}
+\paragraph{Paso 5: Puntos de CU Sin Ajuste (UUCP)} \mbox{} \par
 
 \begin{cajaFormula}
-\[ \text{UUCP} = \text{UAW} + \text{UUCW} = 5 + 30 = \mathbf{35} \]
+	$\displaystyle \text{UUCP} = \text{UAW} + \text{UUCW} = 5 + 30 = \mathbf{35}$
 \end{cajaFormula}
 
 \paragraph{Paso 6: Factor de Complejidad Técnica (TCF)}
@@ -570,11 +560,15 @@ fundamentales. Un error frecuente es puntuar T1 o T10 con valores altos en un si
 que explícitamente es monousuario y no distribuido.
 \end{cajaError}
 
+\paragraph{Paso 7: Factor de Entorno (ECF)} \mbox{} \par
+
 \begin{cajaFormula}
 \[ \text{TCF} = 0{,}06 + 0{,}01 \times \text{TF} = 0{,}06 + 0{,}01 \times 33 = \mathbf{0{,}39} \]
 \end{cajaFormula}
 
-\paragraph{Paso 7: Factor de Entorno (ECF)}
+
+
+
 
 \begin{table}[H]
 \centering
@@ -610,14 +604,14 @@ E8 & Dificultad del lenguaje (Java nuevo) & -1.0 & 5 & -5.0 \\
 \[ \text{ECF} = 1{,}4 - 0{,}03 \times \text{EF} = 1{,}4 - 0{,}03 \times 12{,}5 = \mathbf{1{,}025} \]
 \end{cajaFormula}
 
-\paragraph{Paso 8: PCU Ajustados (AUCP)}
+\paragraph{Paso 8: PCU Ajustados (AUCP)}  \mbox{} \par
 
 \begin{cajaFormula}
 \[ \text{AUCP} = \text{UUCP} \times \text{TCF} \times \text{ECF}
                = 35 \times 0{,}39 \times 1{,}025 = \mathbf{13{,}97} \]
 \end{cajaFormula}
 
-\paragraph{Pasos 9 y 10: Estimación del Esfuerzo y Duración}
+\paragraph{Pasos 9 y 10: Estimación del Esfuerzo y Duración}  \mbox{} \par
 
 \begin{table}[H]
 \centering

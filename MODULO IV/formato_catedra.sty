@@ -1,0 +1,86 @@
+\ProvidesPackage{formato_catedra}
+
+% --- PAQUETES ---
+
+% --- BIBLIOGRAFÍA ---
+\usepackage{url}   % Para que los links en la bibliografía se vean bien
+\usepackage{natbib} % Citas numéricas con BibTeX clásico
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{graphicx}
+\usepackage{tikz} % Para el rectángulo decorativo
+
+
+% ─── Paquetes adicionales ────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{colortbl}
+
+
+
+% --- CONFIGURACIÓN DE PÁGINA CORREGIDA ---
+\geometry{
+    top=3cm, 
+    bottom=4cm,     % Aumentamos el margen inferior para que no haya solape
+    left=3cm, 
+    right=2.5cm,
+    headheight=15pt,
+    footskip=2cm    % Distancia segura entre el texto y el pie de página
+}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em}
+
+% --- COMANDOS PERSONALIZADOS ---
+% Para cambiar el número de lectura y el título en cada documento
+\newcommand{\Lectura}[1]{\def\@lectura{#1}}
+\newcommand{\TituloDocumento}[1]{\def\@titulo{#1}}
+
+% --- ELEMENTO DECORATIVO (Barra Lateral) ---
+\newcommand{\BarraLateral}{
+    \begin{tikzpicture}[remember picture, overlay]
+        % Rectángulo gris oscuro/azul en el margen izquierdo
+        \fill[color=gray!30] (current page.north west) ++(0,0) rectangle ++(0.8cm,-\paperheight);
+        % Opcional: Una línea más fina y oscura al lado
+        \fill[color=gray!80] (current page.north west) ++(0.8cm,0) rectangle ++(0.05cm,-\paperheight);
+    \end{tikzpicture}
+}
+
+% --- CABECERA Y PIE ---
+\pagestyle{fancy}
+\fancyhf{} 
+
+\fancyhead[L]{\BarraLateral \small Gestión de Proyecto de Software}
+\fancyhead[C]{\small \@lectura}
+\fancyhead[R]{AdeS / LeS \\ \small Pág \thepage\ de \pageref{LastPage}}
+
+\fancyfoot[C]{\small Mg. Albert Osiris Sofía.- Lic. Jorge Climis.- Mg. Leonardo González}
+\fancyfoot[R]{\includegraphics[height=1.2cm]{logo_unpa.png}} 
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+% Comando para el título centrado parametrizado
+\newcommand{\HacerTitulo}{
+    \begin{center}
+        {\huge\textbf{\@titulo}}
+    \end{center}
+}
